@@ -1,0 +1,14 @@
+{
+    "stable":{
+        "version":"0.8.1",
+        "code":"00801",
+        "id":8,
+        "url":"https://github.com/sheikhhaziq/vibemusic/releases/latest"
+    },
+    "beta":{
+        "version":"0.9.1 beta",
+        "code":"00901",
+        "id":10,
+        "url":"https://github.com/sheikhhaziq/vibemusic/releases/tag/v0.9.1-beta"
+    }
+}
