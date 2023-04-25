@@ -39,6 +39,8 @@ dependencies:
   audiotagger: ^2.2.1
 
 
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -51,7 +53,8 @@ flutter:
 
   uses-material-design: true
   assets:
-    - assets/images/
     - assets/icons/
+    - assets/images/
+    - assets/images/logo_music.gif
 flutter_intl:
   enabled: true
