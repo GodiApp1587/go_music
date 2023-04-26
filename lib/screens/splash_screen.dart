@@ -1,8 +1,6 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'dart:async';
-
 import 'package:vibe_music/screens/MainScreen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -13,65 +11,54 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  bool _visible = false;
+
   @override
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     Timer(
-      const Duration(seconds: 8),
+      const Duration(seconds: 5),
           () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const MainScreen()),
       ),
     );
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+        _visible = true;
+      });
+    });
   }
 
   @override
   void dispose() {
     super.dispose();
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
+    SystemChrome.setEnabledSystemUIMode(
+        SystemUiMode.manual, overlays: SystemUiOverlay.values);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: double.infinity,
-            padding: EdgeInsets.symmetric(horizontal: 30),
-            child: Text(
-              'GoMusic',
-              textAlign: TextAlign.center,
-              style: GoogleFonts.poppins(
-                fontSize: 43,
-                fontWeight: FontWeight.w500,
-                foreground: Paint()
-                  ..shader = LinearGradient(
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                    colors: [
-                      Color(0xFFC101FF),
+    bool isDark = Theme.of(context).brightness == Brightness.dark;
+    String imagePath = isDark
+        ? 'assets/images/like.png'
+        : 'assets/images/splash_light.png';
 
-                      Color(0xFF000AFF),
-                      Color(0xFF00E0FF),
-                    ],
-                  ).createShader(Rect.fromLTWH(50, 0, 200, 80)),
-              ),
-            ),
-          ),
-          SizedBox(height: 30),
-          Image.asset(
-            'assets/images/logo_music.gif',
-            height: 290,
-            width: 200,
+    return Scaffold(
+
+      body: Center(
+        child: AnimatedOpacity(
+          opacity: _visible ? 1.0 : 0.0,
+          duration: const Duration(milliseconds: 1000),
+          child: Image.asset(
+            imagePath,
+            height: double.infinity,
+            width: double.infinity,
             fit: BoxFit.cover,
           ),
-        ],
+        ),
       ),
     );
-
   }
 }

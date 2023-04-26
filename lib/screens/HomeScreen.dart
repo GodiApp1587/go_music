@@ -8,6 +8,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:glassmorphism_widgets/glassmorphism_widgets.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:vibe_music/Models/Artist.dart';
 import 'package:vibe_music/Models/HomeModel.dart';
@@ -84,7 +85,26 @@ class _HomeScreenState extends State<HomeScreen>
     bool darkTheme = Theme.of(context).brightness == Brightness.dark;
     super.build(context);
     return Scaffold(
-      body: SafeArea(
+
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [Colors.transparent, Colors.transparent],
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
+          ),
+          image: (Theme.of(context).brightness == Brightness.light)
+              ? null // Establecer el color de fondo en el tema claro
+              : const DecorationImage(
+            image: AssetImage('assets/images/fondo_ligh.jpg'),
+            fit: BoxFit.cover,
+          ), // Establecer la imagen de fondo en el tema oscuro
+          color: (Theme.of(context).brightness == Brightness.light)
+              ? Colors.grey[300] // Establecer el gris shade de 300 como color de fondo en el tema claro
+              : null, // No establecer ningún color en el tema oscuro
+        ),
         child: FutureBuilder(
             future: isConnectivity(),
             builder: (context, snapshot) {
@@ -95,7 +115,10 @@ class _HomeScreenState extends State<HomeScreen>
                     children: [
                       Text(
                         "No Internet Connection",
-                        style: Theme.of(context).primaryTextTheme.bodyMedium,
+                        style: Theme
+                            .of(context)
+                            .primaryTextTheme
+                            .bodyMedium,
                       ),
                       OutlinedButton(
                         onPressed: () {
@@ -110,21 +133,21 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
                 );
               }
+
               return isLoading
                   ? const Center(
                       child: CircularProgressIndicator(),
                     )
                   : Column(
+
                       children: [
-                        Container(
-                          height: 50,
+                        const SizedBox(height: 30),
+                        GlassContainer(
+
                           margin: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 8),
+                              horizontal: 15, vertical: 8),
                           padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                              color: (darkTheme ? Colors.white : Colors.black)
-                                  .withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(8)),
+
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -158,7 +181,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 8),
                                     child: Text(
-                                      "Vibe Music",
+                                      "GoMusic",
                                       style: TextStyle(
                                         fontSize: 18,
                                         color: (darkTheme
@@ -192,8 +215,9 @@ class _HomeScreenState extends State<HomeScreen>
                           child: RefreshIndicator(
                             onRefresh: getHomeData,
                             child: SingleChildScrollView(
-                              padding: EdgeInsets.only(top: 8),
+                              padding: const EdgeInsets.only(top: 8),
                               child: SafeArea(
+
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [

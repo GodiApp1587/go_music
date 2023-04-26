@@ -91,7 +91,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Establecer la dirección del texto de derecha a izquierda"),
         "SOCIALS": MessageLookupByLibrary.simpleMessage("SOCIALES"),
         "Search": MessageLookupByLibrary.simpleMessage("Búsqueda"),
-        "Search_something": MessageLookupByLibrary.simpleMessage("buscar algo"),
+        "Search_something": MessageLookupByLibrary.simpleMessage("Buscar"),
         "Settings": MessageLookupByLibrary.simpleMessage("Ajustes"),
         "Songs": MessageLookupByLibrary.simpleMessage("Canciones"),
         "System": MessageLookupByLibrary.simpleMessage("Sistema"),
