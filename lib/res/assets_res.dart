@@ -15,5 +15,4 @@ class AssetsRes {
   static const String LOGO_MUSIC = 'assets/images/logo_music.gif';
   static const String SPLASH_APP = 'assets/images/splash_app.jpg';
   static const String SPLASH_LIGH = 'assets/images/splash_ligh.jpg';
-  static const String SPLASH_LIGHT = 'assets/images/splash_light.png';
 }

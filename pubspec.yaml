@@ -67,6 +67,5 @@ flutter:
     - assets/images/logo_music.gif
     - assets/images/splash_app.jpg
     - assets/images/splash_ligh.jpg
-    - assets/images/splash_light.png
 flutter_intl:
   enabled: true
