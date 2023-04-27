@@ -62,11 +62,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "NO": MessageLookupByLibrary.simpleMessage("NO"),
         "New_Update_Available": MessageLookupByLibrary.simpleMessage(
             "Nueva actualización disponible"),
-        "Nothing_Here": MessageLookupByLibrary.simpleMessage("Nada aquí"),
+        "Nothing_Here": MessageLookupByLibrary.simpleMessage(""),
         "OKAY": MessageLookupByLibrary.simpleMessage("BIEN"),
         "Open_in_Browser":
             MessageLookupByLibrary.simpleMessage("Abierto en el navegador"),
-        "Pitch_black": MessageLookupByLibrary.simpleMessage("tono negro"),
+        "Pitch_black": MessageLookupByLibrary.simpleMessage("Tono negro"),
         "Play_All": MessageLookupByLibrary.simpleMessage("Reproducir todo"),
         "Play_next":
             MessageLookupByLibrary.simpleMessage("Reproducir siguiente"),

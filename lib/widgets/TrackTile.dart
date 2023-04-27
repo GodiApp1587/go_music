@@ -54,7 +54,7 @@ class TrackTile extends StatelessWidget {
       subtitle: Text(
         song.artists.map((e) => e.name).toList().join(', '),
         style: const TextStyle(
-          color: Color.fromARGB(255, 93, 92, 92),
+          color: Color.fromARGB(255, 105, 104, 104),
           overflow: TextOverflow.ellipsis,
         ),
       ),

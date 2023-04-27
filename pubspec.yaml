@@ -39,7 +39,6 @@ dependencies:
   audiotagger: ^2.2.1
   glassmorphism_widgets: ^0.1.4
   glassmorphism: ^3.0.0
-  flutter_blurhash: ^0.7.0
   blur: ^3.1.0
 
 
@@ -61,7 +60,8 @@ flutter:
     - assets/images/
     - assets/images/Play.jpg
     - assets/images/fondo_app.png
+    - assets/images/fondo_dark.png
+    - assets/images/fondo_like.png
     - assets/images/like.png
-    - assets/images/splash_ligh.jpg
 flutter_intl:
   enabled: true
