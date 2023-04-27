@@ -84,70 +84,65 @@ class _HomeScreenState extends State<HomeScreen>
     bool darkTheme = Theme.of(context).brightness == Brightness.dark;
     super.build(context);
     return Scaffold(
-      body: SafeArea(
-        child: FutureBuilder(
-            future: isConnectivity(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData && !(snapshot.data!)) {
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "No Internet Connection",
-                        style: Theme.of(context).primaryTextTheme.bodyMedium,
-                      ),
-                      OutlinedButton(
-                        onPressed: () {
-                          setState(() {
-                            isLoading = true;
-                          });
-                          getHomeData();
-                        },
-                        child: const Text("RETRY"),
-                      ),
-                    ],
-                  ),
-                );
-              }
-              return isLoading
-                  ? const Center(
-                child: CircularProgressIndicator(),
-              )
-                  : Column(
-                children: [
-                  Container(
-                    height: 50,
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 8),
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                        color: (darkTheme ? Colors.white : Colors.black)
-                            .withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(8)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+      body: Container(
+        // Utiliza un gradiente de color para el tema oscuro y un color sólido para el tema claro
+        decoration: BoxDecoration(
+          image: Theme.of(context).brightness == Brightness.light
+              ? const DecorationImage(
+            image: AssetImage("assets/images/fondo_app.png"),
+            fit: BoxFit.cover,
+          ) // Imagen de fondo para tema oscuro
+              : null,
+          color: Theme.of(context).brightness == Brightness.dark
+              ? const Color(0xff212739)
+              : null, // Color sólido para tema claro
+        ),
+        child: SafeArea(
+          child: FutureBuilder(
+              future: isConnectivity(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData && !(snapshot.data!)) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) =>
-                                    const SearchScreen()));
-                          },
-                          child: const Padding(
-                            padding: EdgeInsets.only(left: 8),
-                            child: Icon(
-                              Icons.search_rounded,
-                              size: 26,
-                            ),
-                          ),
+                        Text(
+                          "No Internet Connection",
+                          style: Theme.of(context).primaryTextTheme.bodyMedium,
                         ),
-                        // const SizedBox(width: 8),
-                        Expanded(
-                          child: GestureDetector(
+                        OutlinedButton(
+                          onPressed: () {
+                            setState(() {
+                              isLoading = true;
+                            });
+                            getHomeData();
+                          },
+                          child: const Text("RETRY"),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+                return isLoading
+                    ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+                    : Column(
+                  children: [
+                    Container(
+                      height: 50,
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 8),
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                          color: (darkTheme ? Colors.white : Colors.black)
+                              .withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(16)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          GestureDetector(
                             onTap: () {
                               Navigator.push(
                                   context,
@@ -155,546 +150,175 @@ class _HomeScreenState extends State<HomeScreen>
                                       builder: (_) =>
                                       const SearchScreen()));
                             },
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 8),
-                              child: Text(
-                                "Vibe Music",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: (darkTheme
-                                      ? Colors.white
-                                      : Colors.black)
-                                      .withOpacity(0.7),
+                            child: const Padding(
+                              padding: EdgeInsets.only(left: 8),
+                              child: Icon(
+                                Icons.search_rounded,
+                                size: 26,
+                              ),
+                            ),
+                          ),
+                          // const SizedBox(width: 8),
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) =>
+                                        const SearchScreen()));
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 8),
+                                child: Text(
+                                  "GoMusic",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: (darkTheme
+                                        ? Colors.white
+                                        : Colors.black)
+                                        .withOpacity(0.7),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                        IconButton(
-                          padding: EdgeInsets.zero,
-                          onPressed: () {
-                            mainNavigatorKey.currentState!.push(
-                              CupertinoPageRoute(
-                                builder: (_) => const SettingsScreen(),
-                              ),
-                            );
-                          },
-                          icon: const Icon(
-                            Icons.settings_outlined,
-                            size: 26,
-                          ),
-                          color: darkTheme ? Colors.white : Colors.black,
-                        )
-                      ],
+                          IconButton(
+                            padding: EdgeInsets.zero,
+                            onPressed: () {
+                              mainNavigatorKey.currentState!.push(
+                                CupertinoPageRoute(
+                                  builder: (_) => const SettingsScreen(),
+                                ),
+                              );
+                            },
+                            icon: const Icon(
+                              Icons.settings_outlined,
+                              size: 26,
+                            ),
+                            color: darkTheme ? Colors.white : Colors.black,
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: RefreshIndicator(
-                      onRefresh: getHomeData,
-                      child: SingleChildScrollView(
-                        padding: EdgeInsets.only(top: 8),
-                        child: SafeArea(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  if (head != null)
-                                    CarouselSlider(
-                                      options: CarouselOptions(
-                                        aspectRatio: 16 / 9,
-                                        enableInfiniteScroll: true,
-                                        autoPlay: true,
-                                        enlargeCenterPage: true,
+                    Expanded(
+                      child: RefreshIndicator(
+                        onRefresh: getHomeData,
+                        child: SingleChildScrollView(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: SafeArea(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    if (head != null)
+                                      CarouselSlider(
+                                        options: CarouselOptions(
+                                          aspectRatio: 16 / 9,
+                                          enableInfiniteScroll: true,
+                                          autoPlay: true,
+                                          enlargeCenterPage: true,
+                                        ),
+                                        items: head!.map((s) {
+                                          Track song = Track(
+                                            title: s['title'],
+                                            videoId: s['videoId'],
+                                            artists: [],
+                                            thumbnails: [
+                                              Thumbnail(url: s['image'])
+                                            ],
+                                          );
+                                          return Builder(
+                                            builder:
+                                                (BuildContext context) {
+                                              return ClipRRect(
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                    10),
+                                                child: GestureDetector(
+                                                  onTap: () async {
+                                                    await context
+                                                        .read<MusicPlayer>()
+                                                        .addNew(
+                                                      song,
+                                                    );
+                                                  },
+                                                  onLongPress: () {
+                                                    showOptions(
+                                                        song, context);
+                                                  },
+                                                  child: CachedNetworkImage(
+                                                    imageUrl:
+                                                    'https://img.youtube.com/vi/${song.videoId}/maxresdefault.jpg',
+                                                    fit: BoxFit.fill,
+                                                    width: double.infinity,
+                                                    height: double.infinity,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        }).toList(),
                                       ),
-                                      items: head!.map((s) {
-                                        Track song = Track(
-                                          title: s['title'],
-                                          videoId: s['videoId'],
-                                          artists: [],
-                                          thumbnails: [
-                                            Thumbnail(url: s['image'])
-                                          ],
-                                        );
-                                        return Builder(
-                                          builder:
-                                              (BuildContext context) {
-                                            return ClipRRect(
-                                              borderRadius:
-                                              BorderRadius.circular(
-                                                  10),
-                                              child: GestureDetector(
-                                                onTap: () async {
-                                                  await context
-                                                      .read<MusicPlayer>()
-                                                      .addNew(
-                                                    song,
-                                                  );
-                                                },
-                                                onLongPress: () {
-                                                  showOptions(
-                                                      song, context);
-                                                },
-                                                child: CachedNetworkImage(
-                                                  imageUrl:
-                                                  'https://img.youtube.com/vi/${song.videoId}/maxresdefault.jpg',
-                                                  fit: BoxFit.fill,
-                                                  width: double.infinity,
-                                                  height: double.infinity,
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        );
-                                      }).toList(),
-                                    ),
-                                  Padding(
-                                    padding:
-                                    const EdgeInsets.only(top: 16),
-                                    child: ValueListenableBuilder(
-                                      valueListenable:
-                                      Hive.box('song_history')
-                                          .listenable(),
-                                      builder: (context, Box box, child) {
-                                        List values = box.values.toList();
-                                        values.sort((a, b) =>
-                                            b["timestamp"].compareTo(
-                                                a["timestamp"]));
+                                    Padding(
+                                      padding:
+                                      const EdgeInsets.only(top: 16),
+                                      child: ValueListenableBuilder(
+                                        valueListenable:
+                                        Hive.box('song_history')
+                                            .listenable(),
+                                        builder: (context, Box box, child) {
+                                          List values = box.values.toList();
+                                          values.sort((a, b) =>
+                                              b["timestamp"].compareTo(
+                                                  a["timestamp"]));
 
-                                        return values.isEmpty
-                                            ? const SizedBox.shrink()
-                                            : Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment
-                                              .start,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                              const EdgeInsets
-                                                  .symmetric(
-                                                  vertical: 8,
-                                                  horizontal:
-                                                  8),
-                                              child: Text(
-                                                S
-                                                    .of(context)
-                                                    .Recently_played,
-                                                style: Theme.of(
-                                                    context)
-                                                    .primaryTextTheme
-                                                    .titleLarge
-                                                    ?.copyWith(
-                                                  fontSize: 24,
-                                                  fontWeight:
-                                                  FontWeight
-                                                      .bold,
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 210,
-                                              child: ListView
-                                                  .separated(
+                                          return values.isEmpty
+                                              ? const SizedBox.shrink()
+                                              : Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment
+                                                .start,
+                                            children: [
+                                              Padding(
                                                 padding:
                                                 const EdgeInsets
                                                     .symmetric(
+                                                    vertical: 8,
                                                     horizontal:
-                                                    16),
-                                                scrollDirection:
-                                                Axis.horizontal,
-                                                itemCount:
-                                                values.length,
-                                                separatorBuilder:
-                                                    (context,
-                                                    index) {
-                                                  return const SizedBox(
-                                                      width: 10);
-                                                },
-                                                itemBuilder:
-                                                    (context,
-                                                    index) {
-                                                  Map<String,
-                                                      dynamic>
-                                                  item =
-                                                  jsonDecode(jsonEncode(
-                                                      values.toList()[
-                                                      index]));
-                                                  Track track =
-                                                  Track.fromMap(
-                                                      item);
-
-                                                  return InkWell(
-                                                    onLongPress:
-                                                        () {
-                                                      showOptions(
-                                                          track,
-                                                          context);
-                                                    },
-                                                    onTap: () {
-                                                      context
-                                                          .read<
-                                                          MusicPlayer>()
-                                                          .addNew(
-                                                          track);
-                                                    },
-                                                    child:
-                                                    ClipRRect(
-                                                      borderRadius:
-                                                      BorderRadius
-                                                          .circular(
-                                                          10),
-                                                      child:
-                                                      Container(
-                                                        color: (darkTheme
-                                                            ? Colors
-                                                            .white
-                                                            : Colors
-                                                            .black)
-                                                            .withOpacity(
-                                                            0.2),
-                                                        width: 150,
-                                                        child:
-                                                        Column(
-                                                          crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                          children: [
-                                                            CachedNetworkImage(
-                                                              imageUrl:
-                                                              'https://vibeapi-sheikh-haziq.vercel.app/thumb/hd?id=${track.videoId}',
-                                                              height:
-                                                              150,
-                                                              width:
-                                                              150,
-                                                              fit: BoxFit
-                                                                  .cover,
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                              const EdgeInsets.all(8.0),
-                                                              child:
-                                                              Text(
-                                                                '${track.title} - ${track.artists.map((e) => e.name).toList().join(', ')}',
-                                                                maxLines:
-                                                                2,
-                                                                style: Theme.of(context).primaryTextTheme.bodyLarge?.copyWith(
-                                                                  overflow: TextOverflow.ellipsis,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                  if (recommendations.isNotEmpty)
-                                    Column(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                      children: [
-                                        const SizedBox(height: 10),
-                                        Padding(
-                                          padding:
-                                          const EdgeInsets.symmetric(
-                                              vertical: 8,
-                                              horizontal: 8),
-                                          child: Text(
-                                            S.of(context).Recommended,
-                                            style: Theme.of(context)
-                                                .primaryTextTheme
-                                                .titleLarge
-                                                ?.copyWith(
-                                              fontSize: 24,
-                                              fontWeight:
-                                              FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                        ExpandablePageView(
-                                          controller: PageController(
-                                            initialPage: 0,
-                                            viewportFraction: 0.9,
-                                          ),
-                                          padEnds: false,
-                                          children: [
-                                            Column(
-                                                crossAxisAlignment:
-                                                CrossAxisAlignment
-                                                    .start,
-                                                children: recommendations
-                                                    .sublist(
-                                                    0,
-                                                    recommendations
-                                                        .length >
-                                                        4
-                                                        ? 4
-                                                        : recommendations
-                                                        .length)
-                                                    .map((track) {
-                                                  track['thumbnails'] =
-                                                  track['thumbnail'];
-                                                  return TrackTile(
-                                                      track: track);
-                                                }).toList()),
-                                            if (recommendations.length >
-                                                4)
-                                              Column(
-                                                  crossAxisAlignment:
-                                                  CrossAxisAlignment
-                                                      .start,
-                                                  children: recommendations
-                                                      .sublist(
-                                                      4,
-                                                      recommendations
-                                                          .length >
-                                                          8
-                                                          ? 8
-                                                          : recommendations
-                                                          .length)
-                                                      .map((track) {
-                                                    track['thumbnails'] =
-                                                    track[
-                                                    'thumbnail'];
-                                                    return TrackTile(
-                                                        track: track);
-                                                  }).toList()),
-                                            if (recommendations.length >
-                                                8)
-                                              Column(
-                                                  crossAxisAlignment:
-                                                  CrossAxisAlignment
-                                                      .start,
-                                                  children: recommendations
-                                                      .sublist(
-                                                      8,
-                                                      recommendations
-                                                          .length >
-                                                          12
-                                                          ? 12
-                                                          : recommendations
-                                                          .length)
-                                                      .map((track) {
-                                                    track['thumbnails'] =
-                                                    track[
-                                                    'thumbnail'];
-                                                    return TrackTile(
-                                                        track: track);
-                                                  }).toList()),
-                                            if (recommendations.length >
-                                                12)
-                                              Column(
-                                                  crossAxisAlignment:
-                                                  CrossAxisAlignment
-                                                      .start,
-                                                  children: recommendations
-                                                      .sublist(
-                                                      12,
-                                                      recommendations
-                                                          .length >
-                                                          16
-                                                          ? 16
-                                                          : recommendations
-                                                          .length)
-                                                      .map((track) {
-                                                    track['thumbnails'] =
-                                                    track[
-                                                    'thumbnail'];
-                                                    return TrackTile(
-                                                        track: track);
-                                                  }).toList())
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  if (body != null && body.isNotEmpty)
-                                    ...body.map((item) {
-                                      String title = item.title;
-                                      List content = item.playlists;
-                                      bool areSongs = content.isNotEmpty
-                                          ? content.first['videoId'] !=
-                                          null
-                                          : false;
-
-                                      return content.isEmpty
-                                          ? const SizedBox.shrink()
-                                          : Padding(
-                                        padding:
-                                        const EdgeInsets.only(
-                                            left: 0,
-                                            top: 8.0,
-                                            bottom: 8.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment
-                                              .start,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                              const EdgeInsets
-                                                  .symmetric(
-                                                  vertical: 8,
-                                                  horizontal:
-                                                  8),
-                                              child: Text(
-                                                title,
-                                                style: Theme.of(
-                                                    context)
-                                                    .primaryTextTheme
-                                                    .titleLarge
-                                                    ?.copyWith(
-                                                  fontSize: 24,
-                                                  fontWeight:
-                                                  FontWeight
-                                                      .bold,
+                                                    8),
+                                                child: Text(
+                                                  S
+                                                      .of(context)
+                                                      .Recently_played,
+                                                  style: Theme.of(
+                                                      context)
+                                                      .primaryTextTheme
+                                                      .titleLarge
+                                                      ?.copyWith(
+                                                    fontSize: 24,
+                                                    fontWeight:
+                                                    FontWeight
+                                                        .bold,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            if (areSongs)
-                                              ExpandablePageView(
-                                                controller:
-                                                PageController(
-                                                  initialPage: 0,
-                                                  viewportFraction:
-                                                  0.9,
-                                                ),
-                                                padEnds: false,
-                                                children: [
-                                                  Column(
-                                                      crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .start,
-                                                      children: content
-                                                          .sublist(
-                                                          0,
-                                                          content.length > 4
-                                                              ? 4
-                                                              : content.length)
-                                                          .map((track) {
-                                                        track['artists'] =
-                                                        [
-                                                          Artist(name: track['count'])
-                                                              .toMap()
-                                                        ];
-                                                        track['thumbnails'] =
-                                                        [
-                                                          Thumbnail(
-                                                              url: track['image'])
-                                                              .toMap()
-                                                        ];
-                                                        return TrackTile(
-                                                            track:
-                                                            track);
-                                                      }).toList()),
-                                                  if (content
-                                                      .length >
-                                                      4)
-                                                    Column(
-                                                        crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                        children: content
-                                                            .sublist(
-                                                            4,
-                                                            content.length > 8
-                                                                ? 8
-                                                                : content.length)
-                                                            .map((track) {
-                                                          track['artists'] =
-                                                          [
-                                                            Artist(name: track['count'])
-                                                                .toMap()
-                                                          ];
-                                                          track['thumbnails'] =
-                                                          [
-                                                            Thumbnail(url: track['image'])
-                                                                .toMap()
-                                                          ];
-                                                          return TrackTile(
-                                                              track:
-                                                              track);
-                                                        }).toList()),
-                                                  if (content
-                                                      .length >
-                                                      8)
-                                                    Column(
-                                                        crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                        children: content
-                                                            .sublist(
-                                                            8,
-                                                            content.length > 12
-                                                                ? 12
-                                                                : content.length)
-                                                            .map((track) {
-                                                          track['artists'] =
-                                                          [
-                                                            Artist(name: track['count'])
-                                                                .toMap()
-                                                          ];
-                                                          track['thumbnails'] =
-                                                          [
-                                                            Thumbnail(url: track['image'])
-                                                                .toMap()
-                                                          ];
-                                                          return TrackTile(
-                                                              track:
-                                                              track);
-                                                        }).toList()),
-                                                  if (content
-                                                      .length >
-                                                      12)
-                                                    Column(
-                                                        crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                        children: content
-                                                            .sublist(
-                                                            12,
-                                                            content.length > 16
-                                                                ? 16
-                                                                : content.length)
-                                                            .map((track) {
-                                                          track['artists'] =
-                                                          [
-                                                            Artist(name: track['count'])
-                                                                .toMap()
-                                                          ];
-                                                          track['thumbnails'] =
-                                                          [
-                                                            Thumbnail(url: track['image'])
-                                                                .toMap()
-                                                          ];
-                                                          return TrackTile(
-                                                              track:
-                                                              track);
-                                                        }).toList()),
-                                                ],
-                                              ),
-                                            if (!areSongs)
                                               SizedBox(
-                                                height: 150,
+                                                height: 210,
                                                 child: ListView
                                                     .separated(
-                                                  padding: const EdgeInsets
+                                                  padding:
+                                                  const EdgeInsets
                                                       .symmetric(
                                                       horizontal:
                                                       16),
-                                                  shrinkWrap: true,
                                                   scrollDirection:
                                                   Axis.horizontal,
-                                                  itemCount: content
-                                                      .length,
+                                                  itemCount:
+                                                  values.length,
                                                   separatorBuilder:
                                                       (context,
                                                       index) {
@@ -704,65 +328,508 @@ class _HomeScreenState extends State<HomeScreen>
                                                   itemBuilder:
                                                       (context,
                                                       index) {
-                                                    Map playlist =
-                                                    content[index]
-                                                    as Map;
+                                                    Map<String,
+                                                        dynamic>
+                                                    item =
+                                                    jsonDecode(jsonEncode(
+                                                        values.toList()[
+                                                        index]));
+                                                    Track track =
+                                                    Track.fromMap(
+                                                        item);
 
-                                                    return ClipRRect(
-                                                      borderRadius:
-                                                      BorderRadius
-                                                          .circular(
-                                                          8),
+                                                    return InkWell(
+                                                      onLongPress:
+                                                          () {
+                                                        showOptions(
+                                                            track,
+                                                            context);
+                                                      },
+                                                      onTap: () {
+                                                        context
+                                                            .read<
+                                                            MusicPlayer>()
+                                                            .addNew(
+                                                            track);
+                                                      },
                                                       child:
-                                                      InkWell(
-                                                        onTap: () {
-                                                          Navigator.pushNamed(
-                                                              context,
-                                                              '/playlist',
-                                                              arguments: {
-                                                                'playlistId':
-                                                                playlist['playlistId'] ?? playlist['browseId'],
-                                                                'isAlbum':
-                                                                playlist['browseId'] != null,
-                                                              });
-                                                        },
+                                                      ClipRRect(
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(
+                                                            10),
                                                         child:
-                                                        CachedNetworkImage(
-                                                          imageUrl:
-                                                          playlist[
-                                                          'image'],
-                                                          errorWidget: ((context,
-                                                              error,
-                                                              stackTrace) {
-                                                            return Image.asset(
-                                                                "assets/images/playlist.png");
-                                                          }),
-                                                          height:
-                                                          150,
-                                                          // width: 150,
-                                                          fit: BoxFit
-                                                              .fitHeight,
+                                                        Container(
+                                                          color: (darkTheme
+                                                              ? Colors
+                                                              .white
+                                                              : Colors
+                                                              .black)
+                                                              .withOpacity(
+                                                              0.2),
+                                                          width: 150,
+                                                          child:
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                            children: [
+                                                              CachedNetworkImage(
+                                                                imageUrl:
+                                                                'https://vibeapi-sheikh-haziq.vercel.app/thumb/hd?id=${track.videoId}',
+                                                                height:
+                                                                150,
+                                                                width:
+                                                                150,
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                const EdgeInsets.all(8.0),
+                                                                child:
+                                                                Text(
+                                                                  '${track.title} - ${track.artists.map((e) => e.name).toList().join(', ')}',
+                                                                  maxLines:
+                                                                  2,
+                                                                  style: Theme.of(context).primaryTextTheme.bodyLarge?.copyWith(
+                                                                    overflow: TextOverflow.ellipsis,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
                                                         ),
                                                       ),
                                                     );
                                                   },
                                                 ),
-                                              )
-                                          ],
-                                        ),
-                                      );
-                                    }).toList()
-                                ],
-                              )
-                            ],
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                    if (recommendations.isNotEmpty)
+                                      Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          const SizedBox(height: 10),
+                                          Padding(
+                                            padding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 8,
+                                                horizontal: 8),
+                                            child: Text(
+                                              S.of(context).Recommended,
+                                              style: Theme.of(context)
+                                                  .primaryTextTheme
+                                                  .titleLarge
+                                                  ?.copyWith(
+                                                fontSize: 24,
+                                                fontWeight:
+                                                FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                          ExpandablePageView(
+                                            controller: PageController(
+                                              initialPage: 0,
+                                              viewportFraction: 0.9,
+                                            ),
+                                            padEnds: false,
+                                            children: [
+                                              Column(
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment
+                                                      .start,
+                                                  children: recommendations
+                                                      .sublist(
+                                                      0,
+                                                      recommendations
+                                                          .length >
+                                                          4
+                                                          ? 4
+                                                          : recommendations
+                                                          .length)
+                                                      .map((track) {
+                                                    track['thumbnails'] =
+                                                    track['thumbnail'];
+                                                    return Container(
+                                                      decoration: BoxDecoration(
+                                                        color: Theme.of(context).brightness == Brightness.light ? const Color(0XFFF0F2F4).withOpacity(0.92) : Colors.black.withOpacity(0.44),
+                                                        borderRadius: BorderRadius.circular(18.0),
+                                                      ),
+                                                      margin: const EdgeInsets.symmetric(vertical: 4.0,
+                                                      horizontal: 11),
+                                                      child: TrackTile(track: track),
+                                                    );
+                                                  }).toList(),
+                                              ),
+                                              if (recommendations.length >
+                                                  4)
+                                                Column(
+                                                    crossAxisAlignment:
+                                                    CrossAxisAlignment
+                                                        .start,
+                                                    children: recommendations
+                                                        .sublist(
+                                                        4,
+                                                        recommendations
+                                                            .length >
+                                                            8
+                                                            ? 8
+                                                            : recommendations
+                                                            .length)
+                                                        .map((track) {
+                                                      track['thumbnails'] =
+                                                      track[
+                                                      'thumbnail'];
+                                                      return Container(
+                                                        decoration: BoxDecoration(
+                                                          color: Theme.of(context).brightness == Brightness.light ? const Color(0XFFF0F2F4).withOpacity(0.92) : Colors.black.withOpacity(0.44),
+                                                          borderRadius: BorderRadius.circular(18.0),
+                                                        ),
+                                                        margin: const EdgeInsets.symmetric(vertical: 4.0,
+                                                            horizontal: 11),
+                                                        child: TrackTile(track: track),
+                                                      );
+                                                    }).toList(),),
+                                              if (recommendations.length >
+                                                  8)
+                                                Column(
+                                                    crossAxisAlignment:
+                                                    CrossAxisAlignment
+                                                        .start,
+                                                    children: recommendations
+                                                        .sublist(
+                                                        8,
+                                                        recommendations
+                                                            .length >
+                                                            12
+                                                            ? 12
+                                                            : recommendations
+                                                            .length)
+                                                        .map((track) {
+                                                      track['thumbnails'] =
+                                                      track[
+                                                      'thumbnail'];
+                                                      return Container(
+                                                        decoration: BoxDecoration(
+                                                          color: Theme.of(context).brightness == Brightness.light ? const Color(0XFFF0F2F4).withOpacity(0.92) : Colors.black.withOpacity(0.44),
+                                                          borderRadius: BorderRadius.circular(18.0),
+                                                        ),
+                                                        margin: const EdgeInsets.symmetric(vertical: 4.0,
+                                                            horizontal: 11),
+                                                        child: TrackTile(track: track),
+                                                      );
+                                                    }).toList(),),
+                                              if (recommendations.length >
+                                                  12)
+                                                Column(
+                                                    crossAxisAlignment:
+                                                    CrossAxisAlignment
+                                                        .start,
+                                                    children: recommendations
+                                                        .sublist(
+                                                        12,
+                                                        recommendations
+                                                            .length >
+                                                            16
+                                                            ? 16
+                                                            : recommendations
+                                                            .length)
+                                                        .map((track) {
+                                                      track['thumbnails'] =
+                                                      track[
+                                                      'thumbnail'];
+                                                      return Container(
+                                                        decoration: BoxDecoration(
+                                                          color: Theme.of(context).brightness == Brightness.light ? const Color(0XFFF0F2F4).withOpacity(0.92) : Colors.black.withOpacity(0.44),
+                                                          borderRadius: BorderRadius.circular(18.0),
+                                                        ),
+                                                        margin: const EdgeInsets.symmetric(vertical: 4.0,
+                                                            horizontal: 11),
+                                                        child: TrackTile(track: track),
+                                                      );
+                                                    }).toList(),),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    if (body != null && body.isNotEmpty)
+                                      ...body.map((item) {
+                                        String title = item.title;
+                                        List content = item.playlists;
+                                        bool areSongs = content.isNotEmpty
+                                            ? content.first['videoId'] !=
+                                            null
+                                            : false;
+
+                                        return content.isEmpty
+                                            ? const SizedBox.shrink()
+                                            : Padding(
+                                          padding:
+                                          const EdgeInsets.only(
+                                              left: 0,
+                                              top: 8.0,
+                                              bottom: 8.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment
+                                                .start,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                const EdgeInsets
+                                                    .symmetric(
+                                                    vertical: 8,
+                                                    horizontal:
+                                                    8),
+                                                child: Text(
+                                                  title,
+                                                  style: Theme.of(
+                                                      context)
+                                                      .primaryTextTheme
+                                                      .titleLarge
+                                                      ?.copyWith(
+                                                    fontSize: 24,
+                                                    fontWeight:
+                                                    FontWeight
+                                                        .bold,
+                                                  ),
+                                                ),
+                                              ),
+                                              if (areSongs)
+                                                ExpandablePageView(
+                                                  controller:
+                                                  PageController(
+                                                    initialPage: 0,
+                                                    viewportFraction:
+                                                    0.9,
+                                                  ),
+                                                  padEnds: false,
+                                                  children: [
+                                                    Column(
+                                                        crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                        children: content
+                                                            .sublist(
+                                                            0,
+                                                            content.length > 4
+                                                                ? 4
+                                                                : content.length)
+                                                            .map((track) {
+                                                          track['artists'] =
+                                                          [
+                                                            Artist(name: track['count'])
+                                                                .toMap()
+                                                          ];
+                                                          track['thumbnails'] =
+                                                          [
+                                                            Thumbnail(
+                                                                url: track['image'])
+                                                                .toMap()
+                                                          ];
+                                                          return Container(
+                                                            decoration: BoxDecoration(
+                                                              color: Theme.of(context).brightness == Brightness.light ? const Color(0XFFF0F2F4).withOpacity(0.92) : Colors.black.withOpacity(0.44),
+                                                              borderRadius: BorderRadius.circular(18.0),
+                                                            ),
+                                                            margin: const EdgeInsets.symmetric(vertical: 4.0,
+                                                                horizontal: 11),
+                                                            child: TrackTile(track: track),
+                                                          );
+                                                        }).toList(),),
+                                                    if (content
+                                                        .length >
+                                                        4)
+                                                      Column(
+                                                          crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                          children: content
+                                                              .sublist(
+                                                              4,
+                                                              content.length > 8
+                                                                  ? 8
+                                                                  : content.length)
+                                                              .map((track) {
+                                                            track['artists'] =
+                                                            [
+                                                              Artist(name: track['count'])
+                                                                  .toMap()
+                                                            ];
+                                                            track['thumbnails'] =
+                                                            [
+                                                              Thumbnail(url: track['image'])
+                                                                  .toMap()
+                                                            ];
+                                                            return Container(
+                                                              decoration: BoxDecoration(
+                                                                color: Theme.of(context).brightness == Brightness.light ? const Color(0XFFF0F2F4).withOpacity(0.92) : Colors.black.withOpacity(0.44),
+                                                                borderRadius: BorderRadius.circular(18.0),
+                                                              ),
+                                                              margin: const EdgeInsets.symmetric(vertical: 4.0,
+                                                                  horizontal: 11),
+                                                              child: TrackTile(track: track),
+                                                            );
+                                                          }).toList(),),
+                                                    if (content
+                                                        .length >
+                                                        8)
+                                                      Column(
+                                                          crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                          children: content
+                                                              .sublist(
+                                                              8,
+                                                              content.length > 12
+                                                                  ? 12
+                                                                  : content.length)
+                                                              .map((track) {
+                                                            track['artists'] =
+                                                            [
+                                                              Artist(name: track['count'])
+                                                                  .toMap()
+                                                            ];
+                                                            track['thumbnails'] =
+                                                            [
+                                                              Thumbnail(url: track['image'])
+                                                                  .toMap()
+                                                            ];
+                                                            return Container(
+                                                              decoration: BoxDecoration(
+                                                                color: Theme.of(context).brightness == Brightness.light ? const Color(0XFFF0F2F4).withOpacity(0.92) : Colors.black.withOpacity(0.44),
+                                                                borderRadius: BorderRadius.circular(18.0),
+                                                              ),
+                                                              margin: const EdgeInsets.symmetric(vertical: 4.0,
+                                                                  horizontal: 11),
+                                                              child: TrackTile(track: track),
+                                                            );
+                                                          }).toList(),),
+                                                    if (content
+                                                        .length >
+                                                        12)
+                                                      Column(
+                                                          crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                          children: content
+                                                              .sublist(
+                                                              12,
+                                                              content.length > 16
+                                                                  ? 16
+                                                                  : content.length)
+                                                              .map((track) {
+                                                            track['artists'] =
+                                                            [
+                                                              Artist(name: track['count'])
+                                                                  .toMap()
+                                                            ];
+                                                            track['thumbnails'] =
+                                                            [
+                                                              Thumbnail(url: track['image'])
+                                                                  .toMap()
+                                                            ];
+                                                            return Container(
+                                                              decoration: BoxDecoration(
+                                                                color: Theme.of(context).brightness == Brightness.light ? const Color(0XFFF0F2F4).withOpacity(0.92) : Colors.black.withOpacity(0.44),
+                                                                borderRadius: BorderRadius.circular(18.0),
+                                                              ),
+                                                              margin: const EdgeInsets.symmetric(vertical: 4.0,
+                                                                  horizontal: 11),
+                                                              child: TrackTile(track: track),
+                                                            );
+                                                          }).toList(),),
+                                                  ],
+                                                ),
+                                              if (!areSongs)
+                                                SizedBox(
+                                                  height: 150,
+                                                  child: ListView
+                                                      .separated(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal:
+                                                        16),
+                                                    shrinkWrap: true,
+                                                    scrollDirection:
+                                                    Axis.horizontal,
+                                                    itemCount: content
+                                                        .length,
+                                                    separatorBuilder:
+                                                        (context,
+                                                        index) {
+                                                      return const SizedBox(
+                                                          width: 10);
+                                                    },
+                                                    itemBuilder:
+                                                        (context,
+                                                        index) {
+                                                      Map playlist =
+                                                      content[index]
+                                                      as Map;
+
+                                                      return ClipRRect(
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(
+                                                            8),
+                                                        child:
+                                                        InkWell(
+                                                          onTap: () {
+                                                            Navigator.pushNamed(
+                                                                context,
+                                                                '/playlist',
+                                                                arguments: {
+                                                                  'playlistId':
+                                                                  playlist['playlistId'] ?? playlist['browseId'],
+                                                                  'isAlbum':
+                                                                  playlist['browseId'] != null,
+                                                                });
+                                                          },
+                                                          child:
+                                                          CachedNetworkImage(
+                                                            imageUrl:
+                                                            playlist[
+                                                            'image'],
+                                                            errorWidget: ((context,
+                                                                error,
+                                                                stackTrace) {
+                                                              return Image.asset(
+                                                                  "assets/images/playlist.png");
+                                                            }),
+                                                            height:
+                                                            150,
+                                                            // width: 150,
+                                                            fit: BoxFit
+                                                                .fitHeight,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                  ),
+                                                )
+                                            ],
+                                          ),
+                                        );
+                                      }).toList()
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              );
-            }),
+                  ],
+                );
+              }),
+        ),
       ),
     );
   }
