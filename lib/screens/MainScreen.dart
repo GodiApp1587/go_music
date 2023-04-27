@@ -167,6 +167,28 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                   label: S.of(context).Settings,
                 ),
+                NavigationDestination(
+                  icon: Icon(
+                    CupertinoIcons.tv_circle,
+                    color: darkTheme ? Colors.white : Colors.black,
+                  ),
+                  selectedIcon: Icon(
+                    CupertinoIcons.tv_circle,
+                    color: darkTheme ? Colors.black : Colors.white,
+                  ),
+                  label: S.of(context).Settings,
+                ),
+                NavigationDestination(
+                  icon: Icon(
+                    CupertinoIcons.square_grid_2x2,
+                    color: darkTheme ? Colors.white : Colors.black,
+                  ),
+                  selectedIcon: Icon(
+                    CupertinoIcons.square_grid_2x2,
+                    color: darkTheme ? Colors.black : Colors.white,
+                  ),
+                  label: S.of(context).Settings,
+                ),
               ],
               onDestinationSelected: (int index) {
                 _pageController.animateToPage(
