@@ -2,16 +2,16 @@ import 'dart:async';import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class VideoScreen extends StatefulWidget {
+class VideosScreen extends StatefulWidget {
   final String videoUrl;
 
-  VideoScreen({required this.videoUrl});
+  VideosScreen({required this.videoUrl});
 
   @override
-  _VideoScreenState createState() => _VideoScreenState();
+  _VideosScreenState createState() => _VideosScreenState();
 }
 
-class _VideoScreenState extends State<VideoScreen> with TickerProviderStateMixin {
+class _VideosScreenState extends State<VideosScreen> with TickerProviderStateMixin {
   late YoutubePlayerController _controller;
 
   List<Color> colorList = [
@@ -67,7 +67,7 @@ class _VideoScreenState extends State<VideoScreen> with TickerProviderStateMixin
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-          height: 630,
+          height: 750,
           child: Directionality(
             textDirection: TextDirection.ltr,
             child: AnimatedBuilder(

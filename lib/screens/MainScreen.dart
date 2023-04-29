@@ -13,10 +13,12 @@ import 'package:vibe_music/screens/DownloadScreen.dart';
 import 'package:vibe_music/screens/FavouriteScreen.dart';
 import 'package:vibe_music/screens/HomeScreen.dart';
 import 'package:vibe_music/screens/MoreScreen.dart';
+import 'package:vibe_music/screens/MyBrowser.dart';
 import 'package:vibe_music/screens/PlayListScreen.dart';
 import 'package:vibe_music/screens/PlayerScreen.dart';
 import 'package:vibe_music/screens/SearchScreen.dart';
 import 'package:vibe_music/screens/SettingsScreen.dart';
+import 'package:vibe_music/screens/SliderScreen.dart';
 import 'package:vibe_music/screens/VideoScreen.dart';
 import 'package:vibe_music/screens/videos.dart';
 import 'package:vibe_music/widgets/PanelHeader.dart';
@@ -102,21 +104,21 @@ class _MainScreenState extends State<MainScreen> {
                                     : TextDirection.ltr,
                             child: const DownloadScreen(),
 
-                          ),
+                         ),
                           Directionality(
                           textDirection:
                           box.get('textDirection', defaultValue: 'ltr') ==
                       'rtl'
                       ? TextDirection.rtl
                           : TextDirection.ltr,
-                      child:VideoScreenYoutube(), ),
+                      child:SliderScreen(), ),
                           Directionality(
                             textDirection:
                             box.get('textDirection', defaultValue: 'ltr') ==
                                 'rtl'
                                 ? TextDirection.rtl
                                 : TextDirection.ltr,
-                            child:  BotScreen(),
+                            child:  MyWebBrowser(url: 'https://www.google.com',),
 
                           ),
                         ],
