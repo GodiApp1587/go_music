@@ -1,68 +1,151 @@
+import 'dart:async';import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class VideoPlayerScreen extends StatefulWidget {
+class VideoScreen extends StatefulWidget {
+  final String videoUrl;
+
+  VideoScreen({required this.videoUrl});
+
   @override
-  _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
+  _VideoScreenState createState() => _VideoScreenState();
 }
 
-class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
-  late VideoPlayerController _controller;
-  late Future<void> _initializeVideoPlayerFuture;
+class _VideoScreenState extends State<VideoScreen> with TickerProviderStateMixin {
+  late YoutubePlayerController _controller;
+
+  List<Color> colorList = [
+    Color(0xff171B70),
+    Color(0xff171B70),
+    Color(0xff171B70),
+    Color(0xff410D75),
+    Color(0xff410D75),
+  ];
+
+  List<Alignment> alignmentList = [Alignment.topCenter, Alignment.bottomCenter];
+  int index = 0;
+  Color bottomColor = Color(0xff092646);
+  Color topColor = Color(0xff410D75);
+  Alignment begin = Alignment.bottomCenter;
+  Alignment end = Alignment.topCenter;
+
+  late AnimationController _animationController;
 
   @override
   void initState() {
     super.initState();
-    // Inicializa el controlador de video
-    _controller = VideoPlayerController.network(
-        'https://sample-videos.com/video123/mp4/480/big_buck_bunny_480p_1mb.mp4');
-    _initializeVideoPlayerFuture = _controller.initialize();
+    _controller = YoutubePlayerController(
+      initialVideoId: YoutubePlayer.convertUrlToId(widget.videoUrl)!,
+      flags: YoutubePlayerFlags(
+        autoPlay: false,
+        mute: false,
+      ),
+    );
+    _animationController = AnimationController(
+      duration: Duration(seconds: 2),
+      vsync: this,
+    )..repeat();
+    _animationController.addListener(() {
+      setState(() {
+        index = index + 1;
+        begin = alignmentList[index % alignmentList.length];
+        end = alignmentList[(index + 1) % alignmentList.length];
+        bottomColor = colorList[index % colorList.length];
+        topColor = colorList[(index + 1) % colorList.length];
+      });
+    });
   }
 
   @override
   void dispose() {
-    // Asegurarse de que el controlador se libere al salir de la pantalla
     _controller.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Reproductor de video'),
-      ),
-      body: FutureBuilder(
-        future: _initializeVideoPlayerFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            // Muestra el video una vez que se ha inicializado
-            return AspectRatio(
-              aspectRatio: _controller.value.aspectRatio,
-              child: VideoPlayer(_controller),
-            );
-          } else {
-            // Muestra un indicador de progreso mientras se carga el video
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            if (_controller.value.isPlaying) {
-              _controller.pause();
-            } else {
-              _controller.play();
-            }
-          });
-        },
-        child: Icon(
-          _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-        ),
-      ),
-    );
+        body: Container(
+          height: 630,
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: AnimatedBuilder(
+                animation: _animationController,
+                builder: (context, _) {
+                  return Center(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: begin,
+                          end: end,
+                          colors: [bottomColor, topColor],
+                        ),
+                      ),
+                      child: Center(
+                        child: Card(
+                          elevation: 9,
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(30)),
+                              border: Border.all(
+                                color: Colors.transparent,
+                                width: 2,
+                              ),
+                            ),
+                            child: Container(
+                              height: 550,
+                              width: 340,
+                              child: Column(
+                                children: [
+                                Expanded(
+                                flex: 2,
+                                child: YoutubePlayer(
+                                  controller: _controller,
+                                  showVideoProgressIndicator: true,
+                                ),
+                              ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Container(
+                                      child: Column(
+                                        children: [
+                                          SizedBox(height: 10),
+                                          Text(
+                                            'Lista de reproducción',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: ListView.builder(
+                                              itemBuilder: (context, index) {
+                                                // Aquí puedes construir cada elemento de la lista de videos
+                                                return ListTile(
+                                                  title: Text('Video ${index + 1}'),
+                                                  onTap: () {
+                                                    _controller.load(YoutubePlayer.convertUrlToId("https://www.youtube.com/watch?v=efgh5678")!);
+                                                  },
+                                                );
+                                              },
+                                              itemCount: 10,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+          ),
+        ));
   }
 }

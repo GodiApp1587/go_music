@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'dart:math' as math;
+import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -17,13 +18,16 @@ import 'package:vibe_music/data/home1.dart';
 import 'package:provider/provider.dart';
 import 'package:vibe_music/generated/l10n.dart';
 import 'package:vibe_music/providers/MusicPlayer.dart';
+import 'package:vibe_music/screens/MoreScreen.dart';
 import 'package:vibe_music/screens/SearchScreen.dart';
 
 import 'package:vibe_music/screens/SettingsScreen.dart';
+import 'package:vibe_music/screens/videos.dart';
 import 'package:vibe_music/utils/connectivity.dart';
 import 'package:vibe_music/utils/navigator.dart';
 import 'package:vibe_music/utils/showOptions.dart';
 import 'package:vibe_music/widgets/TrackTile.dart';
+import 'package:vibe_music/widgets/Alert_Dialog.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -94,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen>
           ) // Imagen de fondo para tema oscuro
               : null,
           color: Theme.of(context).brightness == Brightness.dark
-              ? const Color(0xff212739)
+              ? const Color(0xff101828)
               : null, // Color sólido para tema claro
         ),
         child: SafeArea(
@@ -131,13 +135,12 @@ class _HomeScreenState extends State<HomeScreen>
                   children: [
                     Container(
                       height: 50,
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 8),
+                      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                          color: (darkTheme ? Colors.white : Colors.black)
-                              .withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(16)),
+                        color: (darkTheme ? Colors.white : Colors.black).withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -145,10 +148,9 @@ class _HomeScreenState extends State<HomeScreen>
                           GestureDetector(
                             onTap: () {
                               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) =>
-                                      const SearchScreen()));
+                                context,
+                                MaterialPageRoute(builder: (_) => const SearchScreen()),
+                              );
                             },
                             child: const Padding(
                               padding: EdgeInsets.only(left: 8),
@@ -163,10 +165,9 @@ class _HomeScreenState extends State<HomeScreen>
                             child: GestureDetector(
                               onTap: () {
                                 Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) =>
-                                        const SearchScreen()));
+                                  context,
+                                  MaterialPageRoute(builder: (_) => const SearchScreen()),
+                                );
                               },
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 8),
@@ -174,14 +175,26 @@ class _HomeScreenState extends State<HomeScreen>
                                   "GoMusic",
                                   style: TextStyle(
                                     fontSize: 18,
-                                    color: (darkTheme
-                                        ? Colors.white
-                                        : Colors.black)
-                                        .withOpacity(0.7),
+                                    color: (darkTheme ? Colors.white : Colors.black).withOpacity(0.7),
                                   ),
                                 ),
                               ),
                             ),
+                          ),
+                          IconButton(
+                            padding: EdgeInsets.zero,
+                            onPressed: () {
+                              mainNavigatorKey.currentState!.push(
+                                CupertinoPageRoute(
+                                  builder: (_) => BotScreen(),
+                                ),
+                              );
+                            },
+                            icon: const Icon(
+                              Icons.mic_rounded,
+                              size: 26,
+                            ),
+                            color: darkTheme ? Colors.white : Colors.black,
                           ),
                           IconButton(
                             padding: EdgeInsets.zero,
@@ -197,10 +210,11 @@ class _HomeScreenState extends State<HomeScreen>
                               size: 26,
                             ),
                             color: darkTheme ? Colors.white : Colors.black,
-                          )
+                          ),
                         ],
                       ),
                     ),
+
                     Expanded(
                       child: RefreshIndicator(
                         onRefresh: getHomeData,
@@ -363,10 +377,9 @@ class _HomeScreenState extends State<HomeScreen>
                                                           color: (darkTheme
                                                               ? Colors
                                                               .white
-                                                              : Colors
-                                                              .black)
+                                                              : Color(0xff0C0C0C))
                                                               .withOpacity(
-                                                              0.2),
+                                                              0.1),
                                                           width: 150,
                                                           child:
                                                           Column(
@@ -457,15 +470,31 @@ class _HomeScreenState extends State<HomeScreen>
                                                     track['thumbnails'] =
                                                     track['thumbnail'];
                                                     return Container(
-                                                      decoration: BoxDecoration(
-                                                        color: Theme.of(context).brightness == Brightness.light ? const Color(0XFFF0F2F4).withOpacity(0.92) : Colors.black.withOpacity(0.44),
-                                                        borderRadius: BorderRadius.circular(18.0),
-                                                      ),
+
                                                       margin: const EdgeInsets.symmetric(vertical: 4.0,
                                                       horizontal: 11),
-                                                      child: TrackTile(track: track),
-                                                    );
-                                                  }).toList(),
+
+                child: Container(
+                margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 4),
+                decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                ),
+                child: ClipRRect(
+                borderRadius: BorderRadius.circular(18),
+                child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                child: Container(
+                color: Theme.of(context).brightness == Brightness.light
+                ? const Color(0XFFFfffff).withOpacity(0.5)
+                    : Colors.black.withOpacity(0.44),
+                child: TrackTile(track: track),
+                ),
+                ),
+                ),
+                ),
+                );
+                }).toList(),
+
                                               ),
                                               if (recommendations.length >
                                                   4)
@@ -487,15 +516,32 @@ class _HomeScreenState extends State<HomeScreen>
                                                       track[
                                                       'thumbnail'];
                                                       return Container(
-                                                        decoration: BoxDecoration(
-                                                          color: Theme.of(context).brightness == Brightness.light ? const Color(0XFFF0F2F4).withOpacity(0.92) : Colors.black.withOpacity(0.44),
-                                                          borderRadius: BorderRadius.circular(18.0),
-                                                        ),
+
                                                         margin: const EdgeInsets.symmetric(vertical: 4.0,
                                                             horizontal: 11),
-                                                        child: TrackTile(track: track),
+
+                                                        child: Container(
+                                                          margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 4),
+                                                          decoration: BoxDecoration(
+                                                            borderRadius: BorderRadius.circular(18),
+                                                          ),
+                                                          child: ClipRRect(
+                                                            borderRadius: BorderRadius.circular(18),
+                                                            child: BackdropFilter(
+                                                              filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                                                              child: Container(
+                                                                color: Theme.of(context).brightness == Brightness.light
+                                                                    ? const Color(0XFFFfffff).withOpacity(0.5)
+                                                                    : Colors.black.withOpacity(0.44),
+                                                                child: TrackTile(track: track),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
                                                       );
-                                                    }).toList(),),
+                                                    }).toList(),
+
+                                                ),
                                               if (recommendations.length >
                                                   8)
                                                 Column(
@@ -516,15 +562,32 @@ class _HomeScreenState extends State<HomeScreen>
                                                       track[
                                                       'thumbnail'];
                                                       return Container(
-                                                        decoration: BoxDecoration(
-                                                          color: Theme.of(context).brightness == Brightness.light ? const Color(0XFFF0F2F4).withOpacity(0.92) : Colors.black.withOpacity(0.44),
-                                                          borderRadius: BorderRadius.circular(18.0),
-                                                        ),
+
                                                         margin: const EdgeInsets.symmetric(vertical: 4.0,
                                                             horizontal: 11),
-                                                        child: TrackTile(track: track),
+
+                                                        child: Container(
+                                                          margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 4),
+                                                          decoration: BoxDecoration(
+                                                            borderRadius: BorderRadius.circular(18),
+                                                          ),
+                                                          child: ClipRRect(
+                                                            borderRadius: BorderRadius.circular(18),
+                                                            child: BackdropFilter(
+                                                              filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                                                              child: Container(
+                                                                color: Theme.of(context).brightness == Brightness.light
+                                                                    ? const Color(0XFFFfffff).withOpacity(0.5)
+                                                                    : Colors.black.withOpacity(0.44),
+                                                                child: TrackTile(track: track),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
                                                       );
-                                                    }).toList(),),
+                                                    }).toList(),
+
+                                                ),
                                               if (recommendations.length >
                                                   12)
                                                 Column(
@@ -545,15 +608,32 @@ class _HomeScreenState extends State<HomeScreen>
                                                       track[
                                                       'thumbnail'];
                                                       return Container(
-                                                        decoration: BoxDecoration(
-                                                          color: Theme.of(context).brightness == Brightness.light ? const Color(0XFFF0F2F4).withOpacity(0.92) : Colors.black.withOpacity(0.44),
-                                                          borderRadius: BorderRadius.circular(18.0),
-                                                        ),
+
                                                         margin: const EdgeInsets.symmetric(vertical: 4.0,
                                                             horizontal: 11),
-                                                        child: TrackTile(track: track),
+
+                                                        child: Container(
+                                                          margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 4),
+                                                          decoration: BoxDecoration(
+                                                            borderRadius: BorderRadius.circular(18),
+                                                          ),
+                                                          child: ClipRRect(
+                                                            borderRadius: BorderRadius.circular(18),
+                                                            child: BackdropFilter(
+                                                              filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                                                              child: Container(
+                                                                color: Theme.of(context).brightness == Brightness.light
+                                                                    ? const Color(0XFFFfffff).withOpacity(0.5)
+                                                                    : Colors.black.withOpacity(0.44),
+                                                                child: TrackTile(track: track),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
                                                       );
-                                                    }).toList(),),
+                                                    }).toList(),
+
+                                                ),
                                             ],
                                           ),
                                         ],
@@ -634,15 +714,32 @@ class _HomeScreenState extends State<HomeScreen>
                                                                 .toMap()
                                                           ];
                                                           return Container(
-                                                            decoration: BoxDecoration(
-                                                              color: Theme.of(context).brightness == Brightness.light ? const Color(0XFFF0F2F4).withOpacity(0.92) : Colors.black.withOpacity(0.44),
-                                                              borderRadius: BorderRadius.circular(18.0),
-                                                            ),
+
                                                             margin: const EdgeInsets.symmetric(vertical: 4.0,
                                                                 horizontal: 11),
-                                                            child: TrackTile(track: track),
+
+                                                            child: Container(
+                                                              margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 4),
+                                                              decoration: BoxDecoration(
+                                                                borderRadius: BorderRadius.circular(18),
+                                                              ),
+                                                              child: ClipRRect(
+                                                                borderRadius: BorderRadius.circular(18),
+                                                                child: BackdropFilter(
+                                                                  filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                                                                  child: Container(
+                                                                    color: Theme.of(context).brightness == Brightness.light
+                                                                        ? const Color(0XFFFfffff).withOpacity(0.5)
+                                                                        : Colors.black.withOpacity(0.44),
+                                                                    child: TrackTile(track: track),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
                                                           );
-                                                        }).toList(),),
+                                                        }).toList(),
+
+                                                    ),
                                                     if (content
                                                         .length >
                                                         4)
@@ -668,15 +765,32 @@ class _HomeScreenState extends State<HomeScreen>
                                                                   .toMap()
                                                             ];
                                                             return Container(
-                                                              decoration: BoxDecoration(
-                                                                color: Theme.of(context).brightness == Brightness.light ? const Color(0XFFF0F2F4).withOpacity(0.92) : Colors.black.withOpacity(0.44),
-                                                                borderRadius: BorderRadius.circular(18.0),
-                                                              ),
+
                                                               margin: const EdgeInsets.symmetric(vertical: 4.0,
                                                                   horizontal: 11),
-                                                              child: TrackTile(track: track),
+
+                                                              child: Container(
+                                                                margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 4),
+                                                                decoration: BoxDecoration(
+                                                                  borderRadius: BorderRadius.circular(18),
+                                                                ),
+                                                                child: ClipRRect(
+                                                                  borderRadius: BorderRadius.circular(18),
+                                                                  child: BackdropFilter(
+                                                                    filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                                                                    child: Container(
+                                                                      color: Theme.of(context).brightness == Brightness.light
+                                                                          ? const Color(0XFFFfffff).withOpacity(0.5)
+                                                                          : Colors.black.withOpacity(0.44),
+                                                                      child: TrackTile(track: track),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
                                                             );
-                                                          }).toList(),),
+                                                          }).toList(),
+
+                                                      ),
                                                     if (content
                                                         .length >
                                                         8)
@@ -702,15 +816,32 @@ class _HomeScreenState extends State<HomeScreen>
                                                                   .toMap()
                                                             ];
                                                             return Container(
-                                                              decoration: BoxDecoration(
-                                                                color: Theme.of(context).brightness == Brightness.light ? const Color(0XFFF0F2F4).withOpacity(0.92) : Colors.black.withOpacity(0.44),
-                                                                borderRadius: BorderRadius.circular(18.0),
-                                                              ),
+
                                                               margin: const EdgeInsets.symmetric(vertical: 4.0,
                                                                   horizontal: 11),
-                                                              child: TrackTile(track: track),
+
+                                                              child: Container(
+                                                                margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 4),
+                                                                decoration: BoxDecoration(
+                                                                  borderRadius: BorderRadius.circular(18),
+                                                                ),
+                                                                child: ClipRRect(
+                                                                  borderRadius: BorderRadius.circular(18),
+                                                                  child: BackdropFilter(
+                                                                    filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                                                                    child: Container(
+                                                                      color: Theme.of(context).brightness == Brightness.light
+                                                                          ? const Color(0XFFFfffff).withOpacity(0.5)
+                                                                          : Colors.black.withOpacity(0.44),
+                                                                      child: TrackTile(track: track),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
                                                             );
-                                                          }).toList(),),
+                                                          }).toList(),
+
+                                                      ),
                                                     if (content
                                                         .length >
                                                         12)
@@ -736,15 +867,32 @@ class _HomeScreenState extends State<HomeScreen>
                                                                   .toMap()
                                                             ];
                                                             return Container(
-                                                              decoration: BoxDecoration(
-                                                                color: Theme.of(context).brightness == Brightness.light ? const Color(0XFFF0F2F4).withOpacity(0.92) : Colors.black.withOpacity(0.44),
-                                                                borderRadius: BorderRadius.circular(18.0),
-                                                              ),
+
                                                               margin: const EdgeInsets.symmetric(vertical: 4.0,
                                                                   horizontal: 11),
-                                                              child: TrackTile(track: track),
+
+                                                              child: Container(
+                                                                margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 4),
+                                                                decoration: BoxDecoration(
+                                                                  borderRadius: BorderRadius.circular(18),
+                                                                ),
+                                                                child: ClipRRect(
+                                                                  borderRadius: BorderRadius.circular(18),
+                                                                  child: BackdropFilter(
+                                                                    filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                                                                    child: Container(
+                                                                      color: Theme.of(context).brightness == Brightness.light
+                                                                          ? const Color(0XFFFfffff).withOpacity(0.5)
+                                                                          : Colors.black.withOpacity(0.44),
+                                                                      child: TrackTile(track: track),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
                                                             );
-                                                          }).toList(),),
+                                                          }).toList(),
+
+                                                      ),
                                                   ],
                                                 ),
                                               if (!areSongs)

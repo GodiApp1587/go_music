@@ -669,6 +669,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Videos`
+  String get Videos_App {
+    return Intl.message(
+      'Videos',
+      name: 'Videos_App',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chat`
+  String get BotMusic {
+    return Intl.message(
+      'Chat',
+      name: 'BotMusic',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

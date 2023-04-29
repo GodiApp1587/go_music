@@ -60,5 +60,7 @@
     "OKAY":"OKAY",
     "DOWNLOAD":"Download",
     "New_Update_Available":"New Update Available",
-    "Already_updated":"Vibe Music is already up to date."
+    "Already_updated":"Vibe Music is already up to date.",
+  "Videos_App": "Videos",
+  "BotMusic": "Chat"
 }

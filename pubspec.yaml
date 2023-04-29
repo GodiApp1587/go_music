@@ -41,6 +41,11 @@ dependencies:
   glassmorphism: ^3.0.0
   blur: ^3.1.0
   video_player: ^2.6.1
+  youtube_player_flutter: ^8.1.2
+  flutter_inappwebview: ^5.7.2+3
+  speech_to_text: ^6.1.1
+  flutter_image_compress: ^1.1.3
+  animated_gradient: ^0.0.2
 
 
 
@@ -62,6 +67,8 @@ flutter:
     - assets/images/Play.jpg
     - assets/images/fondo_app.png
     - assets/images/fondo_dark.png
+    - assets/images/fondo_des.png
+    - assets/images/fondo_des_light.png
     - assets/images/fondo_like.png
     - assets/images/like.png
 flutter_intl:

@@ -12,6 +12,7 @@ import 'package:vibe_music/providers/DownloadProvider.dart';
 import 'package:vibe_music/providers/MusicPlayer.dart';
 import 'package:vibe_music/providers/SearchProvider.dart';
 import 'package:vibe_music/providers/ThemeProvider.dart';
+//import 'package:vibe_music/providers/VideoProvider.dart';
 import 'package:vibe_music/screens/splash_screen.dart';
 import 'package:vibe_music/utils/navigator.dart';
 import 'generated/l10n.dart';
@@ -31,12 +32,16 @@ void main() async {
   await Hive.openBox('search_history');
   await Hive.openBox('song_history');
   await Hive.openBox('downloads');
+  await Hive.openBox('videos');
+  await Hive.openBox('BotScreen');
   await HomeApi.setCountry();
 
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => MusicPlayer()),
     ChangeNotifierProvider(create: (_) => SearchProvider()),
     ChangeNotifierProvider(create: (_) => DownloadManager()),
+  //ChangeNotifierProvider(create: (_) => VideoProvider()), // agregar el provider de videos
+   // ChangeNotifierProvider(create: (_) => Bot)
   ], child: const MyApp()));
 }
 

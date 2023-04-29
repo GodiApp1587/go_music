@@ -36,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Are you sure to delete song history"),
         "Artists": MessageLookupByLibrary.simpleMessage("Artists"),
         "Audio_Quality": MessageLookupByLibrary.simpleMessage("Audio Quality"),
+        "BotMusic": MessageLookupByLibrary.simpleMessage("Chat"),
         "CANCEL": MessageLookupByLibrary.simpleMessage("CANCEL"),
         "Change_country":
             MessageLookupByLibrary.simpleMessage("Change Country"),
@@ -101,6 +102,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Tracks": MessageLookupByLibrary.simpleMessage("Tracks"),
         "Update": MessageLookupByLibrary.simpleMessage("Update"),
         "Videos": MessageLookupByLibrary.simpleMessage("Videos"),
+        "Videos_App": MessageLookupByLibrary.simpleMessage("Videos"),
         "View_source_code":
             MessageLookupByLibrary.simpleMessage("View source Code"),
         "YES": MessageLookupByLibrary.simpleMessage("YES"),

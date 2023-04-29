@@ -48,8 +48,8 @@ class _SearchScreenState extends State<SearchScreen>
       length: 5,
       vsync: this,
     )..addListener(() {
-        setState(() {});
-      });
+      setState(() {});
+    });
   }
 
   search(value) {
@@ -114,22 +114,22 @@ class _SearchScreenState extends State<SearchScreen>
             ),
             actions: textEditingController.text.trim().isNotEmpty
                 ? [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: IconButton(
-                          onPressed: () {
-                            textEditingController.text = "";
-                            setState(() {});
-                          },
-                          icon: Icon(
-                            CupertinoIcons.xmark,
-                            color: Theme.of(context)
-                                .primaryTextTheme
-                                .bodyLarge
-                                ?.color,
-                          )),
-                    )
-                  ]
+              Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: IconButton(
+                    onPressed: () {
+                      textEditingController.text = "";
+                      setState(() {});
+                    },
+                    icon: Icon(
+                      CupertinoIcons.xmark,
+                      color: Theme.of(context)
+                          .primaryTextTheme
+                          .bodyLarge
+                          ?.color,
+                    )),
+              )
+            ]
                 : [],
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -178,12 +178,12 @@ class _SearchScreenState extends State<SearchScreen>
                             S.of(context).Songs,
                             style: tabController?.index == 0
                                 ? Theme.of(context)
-                                    .primaryTextTheme
-                                    .displaySmall!
+                                .primaryTextTheme
+                                .displaySmall!
                                 : TextStyle(
-                                    color: darkTheme
-                                        ? Colors.white
-                                        : Colors.black),
+                                color: darkTheme
+                                    ? Colors.white
+                                    : Colors.black),
                           ),
                         ),
                       ),
@@ -201,12 +201,12 @@ class _SearchScreenState extends State<SearchScreen>
                             S.of(context).Videos,
                             style: tabController?.index == 1
                                 ? Theme.of(context)
-                                    .primaryTextTheme
-                                    .displaySmall
+                                .primaryTextTheme
+                                .displaySmall
                                 : TextStyle(
-                                    color: darkTheme
-                                        ? Colors.white
-                                        : Colors.black),
+                                color: darkTheme
+                                    ? Colors.white
+                                    : Colors.black),
                           ),
                         ),
                       ),
@@ -224,12 +224,12 @@ class _SearchScreenState extends State<SearchScreen>
                             S.of(context).Artists,
                             style: tabController?.index == 2
                                 ? Theme.of(context)
-                                    .primaryTextTheme
-                                    .displaySmall
+                                .primaryTextTheme
+                                .displaySmall
                                 : TextStyle(
-                                    color: darkTheme
-                                        ? Colors.white
-                                        : Colors.black),
+                                color: darkTheme
+                                    ? Colors.white
+                                    : Colors.black),
                           ),
                         ),
                       ),
@@ -247,12 +247,12 @@ class _SearchScreenState extends State<SearchScreen>
                             S.of(context).Albums,
                             style: tabController?.index == 3
                                 ? Theme.of(context)
-                                    .primaryTextTheme
-                                    .displaySmall
+                                .primaryTextTheme
+                                .displaySmall
                                 : TextStyle(
-                                    color: darkTheme
-                                        ? Colors.white
-                                        : Colors.black),
+                                color: darkTheme
+                                    ? Colors.white
+                                    : Colors.black),
                           ),
                         ),
                       ),
@@ -270,12 +270,12 @@ class _SearchScreenState extends State<SearchScreen>
                             S.of(context).Playlists,
                             style: tabController?.index == 4
                                 ? Theme.of(context)
-                                    .primaryTextTheme
-                                    .displaySmall
+                                .primaryTextTheme
+                                .displaySmall
                                 : TextStyle(
-                                    color: darkTheme
-                                        ? Colors.white
-                                        : Colors.black),
+                                color: darkTheme
+                                    ? Colors.white
+                                    : Colors.black),
                           ),
                         ),
                       ),
@@ -285,88 +285,88 @@ class _SearchScreenState extends State<SearchScreen>
               Expanded(
                 child: textEditingController.text.trim().isEmpty
                     ? SearchHistory(
-                        onTap: (value) {
-                          search(value);
-                        },
-                        onTrailing: (e) {
-                          setState(() {
-                            textEditingController.text = e;
-                            submitted = false;
-                          });
-                        },
-                      )
+                  onTap: (value) {
+                    search(value);
+                  },
+                  onTrailing: (e) {
+                    setState(() {
+                      textEditingController.text = e;
+                      submitted = false;
+                    });
+                  },
+                )
                     : submitted
-                        ? Column(
-                            children: [
-                              Expanded(
-                                child: TabBarView(
-                                  controller: tabController,
-                                  children: [
-                                    SongsSearch(
-                                        query: textEditingController.text),
-                                    VideoSearch(
-                                        query: textEditingController.text),
-                                    ArtistsSearch(
-                                        query: textEditingController.text),
-                                    AlbumSearch(
-                                        query: textEditingController.text),
-                                    PlaylistSearch(
-                                        query: textEditingController.text)
-                                  ],
-                                ),
-                              ),
-                            ],
-                          )
-                        : ValueListenableBuilder(
-                            valueListenable: Hive.box('settings').listenable(),
-                            builder: (context, Box box, child) {
-                              return ListView.builder(
-                                padding: const EdgeInsets.all(16),
-                                itemCount: suggestions.length,
-                                itemBuilder: (context, index) {
-                                  String e = suggestions[index];
-                                  return ListTile(
-                                    enableFeedback: false,
-                                    contentPadding: const EdgeInsets.symmetric(
-                                        horizontal: 8, vertical: 0),
-                                    visualDensity: VisualDensity.compact,
-                                    leading: Icon(Icons.search,
-                                        color: Theme.of(context)
-                                            .primaryTextTheme
-                                            .bodyLarge
-                                            ?.color),
-                                    trailing: IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          textEditingController.text = e;
-                                          submitted = false;
-                                        });
-                                      },
-                                      icon: Icon(
-                                          box.get('textDirection',
-                                                      defaultValue: 'ltr') ==
-                                                  'rtl'
-                                              ? CupertinoIcons.arrow_up_right
-                                              : CupertinoIcons.arrow_up_left,
-                                          color: Theme.of(context)
-                                              .primaryTextTheme
-                                              .bodyLarge
-                                              ?.color),
-                                    ),
-                                    dense: true,
-                                    title: Text(
-                                      e,
-                                      style: Theme.of(context)
-                                          .primaryTextTheme
-                                          .bodyLarge,
-                                    ),
-                                    onTap: () {
-                                      search(e);
-                                    },
-                                  );
-                                },
-                              );
-                            }),
+                    ? Column(
+                  children: [
+                    Expanded(
+                      child: TabBarView(
+                        controller: tabController,
+                        children: [
+                          SongsSearch(
+                              query: textEditingController.text),
+                          VideoSearch(
+                              query: textEditingController.text),
+                          ArtistsSearch(
+                              query: textEditingController.text),
+                          AlbumSearch(
+                              query: textEditingController.text),
+                          PlaylistSearch(
+                              query: textEditingController.text)
+                        ],
+                      ),
+                    ),
+                  ],
+                )
+                    : ValueListenableBuilder(
+                    valueListenable: Hive.box('settings').listenable(),
+                    builder: (context, Box box, child) {
+                      return ListView.builder(
+                        padding: const EdgeInsets.all(16),
+                        itemCount: suggestions.length,
+                        itemBuilder: (context, index) {
+                          String e = suggestions[index];
+                          return ListTile(
+                            enableFeedback: false,
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 0),
+                            visualDensity: VisualDensity.compact,
+                            leading: Icon(Icons.search,
+                                color: Theme.of(context)
+                                    .primaryTextTheme
+                                    .bodyLarge
+                                    ?.color),
+                            trailing: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  textEditingController.text = e;
+                                  submitted = false;
+                                });
+                              },
+                              icon: Icon(
+                                  box.get('textDirection',
+                                      defaultValue: 'ltr') ==
+                                      'rtl'
+                                      ? CupertinoIcons.arrow_up_right
+                                      : CupertinoIcons.arrow_up_left,
+                                  color: Theme.of(context)
+                                      .primaryTextTheme
+                                      .bodyLarge
+                                      ?.color),
+                            ),
+                            dense: true,
+                            title: Text(
+                              e,
+                              style: Theme.of(context)
+                                  .primaryTextTheme
+                                  .bodyLarge,
+                            ),
+                            onTap: () {
+                              search(e);
+                            },
+                          );
+                        },
+                      );
+                    }),
               ),
             ],
           ),
