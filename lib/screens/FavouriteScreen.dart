@@ -15,7 +15,7 @@ class FavouriteScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Theme.of(context).brightness == Brightness.light
             ? const Color(0xffF4F8FF).withAlpha(200)
-            : Color(0xff9496A8),
+            : Color(0xff959aad),
 
         elevation: 0,
         title: Text(
@@ -48,7 +48,9 @@ class FavouriteScreen extends StatelessWidget {
               return Center(
                 child: Text(
                   S.of(context).Nothing_Here,
-                  style: Theme.of(context).primaryTextTheme.bodyLarge,
+                  style: TextStyle(
+                      color: Colors.transparent
+                  ),
                 ),
               );
             }
