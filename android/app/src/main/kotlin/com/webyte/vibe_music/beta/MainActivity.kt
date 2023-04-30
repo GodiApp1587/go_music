@@ -1,4 +1,4 @@
-package com.webyte.vibe_music.beta
+package com.godimexico.gomusic
 
 import io.flutter.embedding.android.FlutterActivity
 
