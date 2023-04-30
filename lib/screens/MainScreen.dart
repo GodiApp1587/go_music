@@ -19,8 +19,6 @@ import 'package:vibe_music/screens/PlayerScreen.dart';
 import 'package:vibe_music/screens/SearchScreen.dart';
 import 'package:vibe_music/screens/SettingsScreen.dart';
 import 'package:vibe_music/screens/SliderScreen.dart';
-import 'package:vibe_music/screens/VideoScreen.dart';
-import 'package:vibe_music/screens/videos.dart';
 import 'package:vibe_music/widgets/PanelHeader.dart';
 
 import '../utils/checkUpdate.dart';
@@ -112,15 +110,7 @@ class _MainScreenState extends State<MainScreen> {
                       ? TextDirection.rtl
                           : TextDirection.ltr,
                       child:SliderScreen(), ),
-                          Directionality(
-                            textDirection:
-                            box.get('textDirection', defaultValue: 'ltr') ==
-                                'rtl'
-                                ? TextDirection.rtl
-                                : TextDirection.ltr,
-                            child:  MyWebBrowser(url: 'https://www.google.com',),
 
-                          ),
                         ],
                       );
                     }),
@@ -191,26 +181,16 @@ class _MainScreenState extends State<MainScreen> {
                 ),
                 NavigationDestination(
                   icon: Icon(
-                    CupertinoIcons.tv_circle,
+                    CupertinoIcons.play_rectangle,
                     color: darkTheme ? Colors.white : Colors.black,
                   ),
                   selectedIcon: Icon(
-                    CupertinoIcons.tv_circle,
+                    CupertinoIcons.play_rectangle,
                     color: darkTheme ? Colors.black : Colors.white,
                   ),
                   label: S.of(context).Settings,
                 ),
-                NavigationDestination(
-                  icon: Icon(
-                    CupertinoIcons.square_grid_2x2,
-                    color: darkTheme ? Colors.white : Colors.black,
-                  ),
-                  selectedIcon: Icon(
-                    CupertinoIcons.square_grid_2x2,
-                    color: darkTheme ? Colors.black : Colors.white,
-                  ),
-                  label: S.of(context).Settings,
-                ),
+
               ],
               onDestinationSelected: (int index) {
                 _pageController.animateToPage(
