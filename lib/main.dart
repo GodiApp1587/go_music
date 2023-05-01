@@ -12,6 +12,7 @@ import 'package:vibe_music/providers/DownloadProvider.dart';
 import 'package:vibe_music/providers/MusicPlayer.dart';
 import 'package:vibe_music/providers/SearchProvider.dart';
 import 'package:vibe_music/providers/ThemeProvider.dart';
+import 'package:vibe_music/screens/DesignScreen.dart';
 //import 'package:vibe_music/providers/VideoProvider.dart';
 import 'package:vibe_music/screens/splash_screen.dart';
 import 'package:vibe_music/utils/navigator.dart';
@@ -82,8 +83,10 @@ class MyApp extends StatelessWidget {
                       : ThemeMode.system,
               home: const Directionality(
                 textDirection: TextDirection.ltr,
-                child: SplashScreen(),
+                child: PageLoginGuideAr(),
               ),
+
+
             );
           },
         );
