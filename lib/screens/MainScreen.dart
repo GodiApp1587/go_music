@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:vibe_music/generated/l10n.dart';
 import 'package:vibe_music/providers/MusicPlayer.dart';
 import 'package:vibe_music/screens/ArtistScreen.dart';
+import 'package:vibe_music/screens/DesignScreen.dart';
 import 'package:vibe_music/screens/DownloadScreen.dart';
 import 'package:vibe_music/screens/FavouriteScreen.dart';
 import 'package:vibe_music/screens/HomeScreen.dart';
@@ -103,14 +104,20 @@ class _MainScreenState extends State<MainScreen> {
                             child: const DownloadScreen(),
 
                          ),
-                          Directionality(
-                          textDirection:
-                          box.get('textDirection', defaultValue: 'ltr') ==
-                      'rtl'
-                      ? TextDirection.rtl
-                          : TextDirection.ltr,
-                      child:SliderScreen(), ),
-
+                   //      Directionality(
+                     //     textDirection:
+                       //   box.get('textDirection', defaultValue: 'ltr') ==
+                     // 'rtl'
+                     // ? TextDirection.rtl
+                       //   : TextDirection.ltr,
+                     // child:SliderScreen(), ),
+                       //   Directionality(
+                         //   textDirection:
+                           // box.get('textDirection', defaultValue: 'ltr') ==
+                             //   'rtl'
+                            //    ? TextDirection.rtl
+                              //  : TextDirection.ltr,
+                          //  child:PageLoginGuideAr(), ),
                         ],
                       );
                     }),
@@ -142,65 +149,100 @@ class _MainScreenState extends State<MainScreen> {
                 ],
               );
             }),
-            bottomNavigationBar: NavigationBar(
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              height: 60,
-              destinations: [
-                NavigationDestination(
-                  icon: Icon(
-                    Icons.home_outlined,
-                    color: darkTheme ? Colors.white : Colors.black,
-                  ),
-                  selectedIcon: Icon(
-                    Icons.home_rounded,
-                    color: darkTheme ? Colors.black : Colors.white,
-                  ),
-                  label: S.of(context).Home,
-                ),
-                NavigationDestination(
-                  icon: Icon(
-                    CupertinoIcons.heart,
-                    color: darkTheme ? Colors.white : Colors.black,
-                  ),
-                  selectedIcon: Icon(
-                    CupertinoIcons.heart_fill,
-                    color: darkTheme ? Colors.black : Colors.white,
-                  ),
-                  label: S.of(context).Settings,
-                ),
-                NavigationDestination(
-                  icon: Icon(
-                    CupertinoIcons.download_circle,
-                    color: darkTheme ? Colors.white : Colors.black,
-                  ),
-                  selectedIcon: Icon(
-                    CupertinoIcons.download_circle_fill,
-                    color: darkTheme ? Colors.black : Colors.white,
-                  ),
-                  label: S.of(context).Settings,
-                ),
-                NavigationDestination(
-                  icon: Icon(
-                    CupertinoIcons.play_rectangle,
-                    color: darkTheme ? Colors.white : Colors.black,
-                  ),
-                  selectedIcon: Icon(
-                    CupertinoIcons.play_rectangle,
-                    color: darkTheme ? Colors.black : Colors.white,
-                  ),
-                  label: S.of(context).Settings,
-                ),
+            bottomNavigationBar: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/bottom.png'),
+                  fit: BoxFit.cover,
+                ),),
 
-              ],
-              onDestinationSelected: (int index) {
-                _pageController.animateToPage(
-                  index,
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.easeInOut,
-                );
-              },
-              selectedIndex: _pageIndex,
-              labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+
+              child: Container(
+                decoration: BoxDecoration(
+
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color(0xff0B0B0E).withOpacity(0.1),
+                      Color(0xff0B0B0E).withOpacity(0.4),
+
+                      Color(0xff000000)
+                    ],
+                  ),
+                ),
+                child: NavigationBar(
+                  backgroundColor: Colors.transparent,
+                  height: 65,
+                  destinations: [
+                    NavigationDestination(
+                      icon: Icon(
+                        Icons.home_outlined,
+                        color: darkTheme ? Colors.lightGreenAccent : Colors.lightGreenAccent,
+                      ),
+                      selectedIcon: Icon(
+                        Icons.home_rounded,
+                        color: darkTheme ? Colors.black : Colors.lightGreenAccent,
+                      ),
+                      label: S.of(context).Home,
+                    ),
+                    NavigationDestination(
+                      icon: Icon(
+                        CupertinoIcons.heart,
+                        color: darkTheme ? Colors.lightGreenAccent : Colors.lightGreenAccent,
+                      ),
+                      selectedIcon: Icon(
+                        CupertinoIcons.heart_fill,
+                        color: darkTheme ? Colors.black : Colors.lightGreenAccent,
+                      ),
+                      label: S.of(context).Settings,
+                    ),
+                    NavigationDestination(
+                      icon: Icon(
+                        CupertinoIcons.download_circle,
+                        color: darkTheme ? Colors.lightGreenAccent : Colors.lightGreenAccent,
+                      ),
+                      selectedIcon: Icon(
+                        CupertinoIcons.download_circle_fill,
+                        color: darkTheme ? Colors.black : Colors.lightGreenAccent,
+                      ),
+                      label: S.of(context).Settings,
+                    ),
+                //    NavigationDestination(
+
+                  //    icon: Icon(
+                    //    CupertinoIcons.play_rectangle,
+                      //  color: darkTheme ? Colors.white : Colors.black,
+                    //  ),
+                     // selectedIcon: Icon(
+                       // CupertinoIcons.play_rectangle,
+                      //  color: darkTheme ? Colors.black : Colors.white,
+                    //  ),
+                    //  label: S.of(context).Settings,
+                    //),
+                   // NavigationDestination(
+                    //  icon: Icon(
+                      //  CupertinoIcons.play_rectangle,
+                      //  color: darkTheme ? Colors.white : Colors.black,
+                     // ),
+                     // selectedIcon: Icon(
+                       // CupertinoIcons.play_rectangle,
+                      //  color: darkTheme ? Colors.black : Colors.white,
+                     // ),
+                     // label: S.of(context).Settings,
+                   // ),
+                  ],
+                  onDestinationSelected: (int index) {
+                    _pageController.animateToPage(
+                      index,
+                      duration: const Duration(milliseconds: 200),
+                      curve: Curves.easeInOut,
+                    );
+                  },
+                  selectedIndex: _pageIndex,
+                  labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+                ),
+              ),
             ),
           );
         });

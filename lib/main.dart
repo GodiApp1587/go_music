@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -13,13 +12,36 @@ import 'package:vibe_music/providers/MusicPlayer.dart';
 import 'package:vibe_music/providers/SearchProvider.dart';
 import 'package:vibe_music/providers/ThemeProvider.dart';
 import 'package:vibe_music/screens/DesignScreen.dart';
+import 'package:vibe_music/screens/MainScreen.dart';
 //import 'package:vibe_music/providers/VideoProvider.dart';
 import 'package:vibe_music/screens/splash_screen.dart';
 import 'package:vibe_music/utils/navigator.dart';
 import 'generated/l10n.dart';
 
+
+//AppOpenAd? appOpenAd;
+//loadAppOpenAd(){
+  //AppOpenAd.load(
+    //  adUnitId: Platform.isAndroid
+      //? 'ca-app-pub-2361280395457206/928374223'
+      //: 'ca-app-pub-2361280395457206/1067717585',
+      //request: AdRequest(),
+      //adLoadCallback: AppOpenAdLoadCallback(
+        //  onAdLoaded: (ad){
+          //  appOpenAd=ad;
+           // appOpenAd!.show();
+         // },
+         // onAdFailedToLoad: (error){
+           // print(error);
+ // }),
+   //   orientation: AppOpenAd.orientationPortrait);
+//}
+
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // MobileAds.instance.initialize();
+  //loadAppOpenAd();
   if (Platform.isAndroid) {
     await JustAudioBackground.init(
       androidNotificationChannelId: 'com.ryanhzeise.bg_demo.channel.audio',
@@ -33,7 +55,7 @@ void main() async {
   await Hive.openBox('search_history');
   await Hive.openBox('song_history');
   await Hive.openBox('downloads');
-  await Hive.openBox('videos');
+ // await Hive.openBox('videos');
   await Hive.openBox('BotScreen');
   await HomeApi.setCountry();
 
@@ -45,7 +67,8 @@ void main() async {
    // ChangeNotifierProvider(create: (_) => Bot)
   ], child: const MyApp()));
 }
-
+//const String testDevic='a61853af-819a-4758-9e2d-10ca1ad1abe1';
+//const int maxFailedLoadAttempts = 3;
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -83,7 +106,7 @@ class MyApp extends StatelessWidget {
                       : ThemeMode.system,
               home: const Directionality(
                 textDirection: TextDirection.ltr,
-                child: PageLoginGuideAr(),
+                child: SplashScreen(),
               ),
 
 
@@ -98,7 +121,7 @@ class MyApp extends StatelessWidget {
 MaterialColor createMaterialColor(Color color) {
   List strengths = <double>[.05];
   Map<int, Color> swatch = {};
-  final int r = color.red, g = color.green, b = color.blue;
+  final int r = color.blue, g = color.green, b = color.blue;
 
   for (int i = 1; i < 10; i++) {
     strengths.add(0.1 * i);

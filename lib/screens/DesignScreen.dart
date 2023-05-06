@@ -89,7 +89,7 @@ class _PageLoginGuideArState extends State<PageLoginGuideAr> {
       ),
       child: Material(
         child: Container(
-          color: Theme.of(context).scaffoldBackgroundColor,
+          color: Colors.transparent,
           child: Stack(
             children: [
               // background : imagen de la ciudad

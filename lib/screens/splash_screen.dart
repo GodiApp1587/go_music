@@ -1,6 +1,10 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+
+import 'package:vibe_music/main.dart';
 import 'package:vibe_music/screens/MainScreen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -11,11 +15,30 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
   bool _visible = false;
+ // AppOpenAd? appOpenAd;
+  //loadAppOpenAd(){
+    //AppOpenAd.load(
+      //  adUnitId: Platform.isAndroid
+        //    ? 'ca-app-pub-2361280395457206/928374223'
+          //  : 'ca-app-pub-2361280395457206/1067717585',
+       // request: AdRequest(),
+       // adLoadCallback: AppOpenAdLoadCallback(
+         //   onAdLoaded: (ad){
+           //   appOpenAd=ad;
+             // appOpenAd!.show();
+          //  },
+           // onAdFailedToLoad: (error){
+             // print(error);
+           // }),
+       // orientation: AppOpenAd.orientationPortrait);
+ // }
 
   @override
   void initState() {
     super.initState();
+  //  loadAppOpenAd();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     Timer(
       const Duration(seconds: 5),

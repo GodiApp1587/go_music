@@ -914,6 +914,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.16"
+  translucent_navigation_bar:
+    dependency: "direct main"
+    description:
+      name: translucent_navigation_bar
+      sha256: d9251f2d872176b96af9e6e755ac88d506abcac367b2ede6bca446c198777587
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   typed_data:
     dependency: transitive
     description:

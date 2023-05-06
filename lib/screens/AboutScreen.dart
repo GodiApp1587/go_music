@@ -13,7 +13,7 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     List socials = [
       {
-        'icon': FontAwesomeIcons.github,
+        'icon': FontAwesomeIcons.facebook,
         'title': 'GitHub',
         'link': 'https://github.com/sheikhhaziq',
         'subtitle': S.of(context).Open_in_Browser
@@ -103,14 +103,11 @@ class AboutScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            "Vibe Music ",
+                            "GoMusic ",
                             style:
                                 Theme.of(context).primaryTextTheme.titleLarge,
                           ),
-                          Text(
-                            version,
-                            style: Theme.of(context).primaryTextTheme.bodyLarge,
-                          )
+
                         ],
                       ),
                       const SizedBox(height: 50),

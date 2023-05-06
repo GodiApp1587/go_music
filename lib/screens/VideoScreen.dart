@@ -83,7 +83,7 @@ class _VideoScreenState extends State<VideoScreen>
                   child: AspectRatio(
                     aspectRatio: 16/9,
                     child: YoutubePlayerWidget(
-    videoUrl: 'https://www.youtube.com/watch?v=ZAvehmatmCo&pp=ygUOcmVuYXRvIHBhY2hlY28%3D',
+    videoUrl: 'https://music.youtube.com/watch?v=QD1Ae_7JGUM&list=RDAMVM3jwxZ3EjCs4',
     ),
                   ),
                 ),

@@ -96,9 +96,11 @@ class _HomeScreenState extends State<HomeScreen>
             image: AssetImage("assets/images/fondo_app.png"),
             fit: BoxFit.cover,
           ) // Imagen de fondo para tema oscuro
-              : null,
-          color: Theme.of(context).brightness == Brightness.dark
-              ? const Color(0xff101828)
+              : Theme.of(context).brightness == Brightness.dark
+              ? const DecorationImage(
+            image: AssetImage("assets/images/fondo_theme.png"),
+            fit: BoxFit.cover,
+          ) // Imagen de fondo para tema oscuro
               : null, // Color sólido para tema claro
         ),
         child: SafeArea(
@@ -301,9 +303,9 @@ class _HomeScreenState extends State<HomeScreen>
                                                 padding:
                                                 const EdgeInsets
                                                     .symmetric(
-                                                    vertical: 8,
+                                                    vertical: 9,
                                                     horizontal:
-                                                    8),
+                                                    9.6),
                                                 child: Text(
                                                   S
                                                       .of(context)
@@ -313,15 +315,15 @@ class _HomeScreenState extends State<HomeScreen>
                                                       .primaryTextTheme
                                                       .titleLarge
                                                       ?.copyWith(
-                                                    fontSize: 24,
+                                                    fontSize: 21,
                                                     fontWeight:
                                                     FontWeight
-                                                        .bold,
+                                                        .w600,
                                                   ),
                                                 ),
                                               ),
                                               SizedBox(
-                                                height: 210,
+                                                height: 190,
                                                 child: ListView
                                                     .separated(
                                                   padding:
@@ -337,7 +339,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                       (context,
                                                       index) {
                                                     return const SizedBox(
-                                                        width: 10);
+                                                        width: 13);
                                                   },
                                                   itemBuilder:
                                                       (context,
@@ -371,7 +373,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                         borderRadius:
                                                         BorderRadius
                                                             .circular(
-                                                            10),
+                                                            25),
                                                         child:
                                                         Container(
                                                           color: (darkTheme
@@ -379,8 +381,8 @@ class _HomeScreenState extends State<HomeScreen>
                                                               .white
                                                               : Color(0xff0C0C0C))
                                                               .withOpacity(
-                                                              0.1),
-                                                          width: 150,
+                                                              0.2),
+                                                          width: 141,
                                                           child:
                                                           Column(
                                                             crossAxisAlignment:
@@ -391,9 +393,9 @@ class _HomeScreenState extends State<HomeScreen>
                                                                 imageUrl:
                                                                 'https://vibeapi-sheikh-haziq.vercel.app/thumb/hd?id=${track.videoId}',
                                                                 height:
-                                                                150,
+                                                                140,
                                                                 width:
-                                                                150,
+                                                                140,
                                                                 fit: BoxFit
                                                                     .cover,
                                                               ),
@@ -432,17 +434,17 @@ class _HomeScreenState extends State<HomeScreen>
                                           Padding(
                                             padding:
                                             const EdgeInsets.symmetric(
-                                                vertical: 8,
-                                                horizontal: 8),
+                                                vertical: 9,
+                                                horizontal: 9.6),
                                             child: Text(
                                               S.of(context).Recommended,
                                               style: Theme.of(context)
                                                   .primaryTextTheme
                                                   .titleLarge
                                                   ?.copyWith(
-                                                fontSize: 24,
+                                                fontSize: 21,
                                                 fontWeight:
-                                                FontWeight.bold,
+                                                FontWeight.w600,
                                               ),
                                             ),
                                           ),
@@ -472,10 +474,10 @@ class _HomeScreenState extends State<HomeScreen>
                                                     return Container(
 
                                                       margin: const EdgeInsets.symmetric(vertical: 4.0,
-                                                      horizontal: 11),
+                                                      horizontal: 6),
 
                 child: Container(
-                margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 4),
+                margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 2),
                 decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
                 ),
