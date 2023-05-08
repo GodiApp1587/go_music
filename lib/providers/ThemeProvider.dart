@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../main.dart';
 
 PrimaryColor defaultPrimaryColor =
-    PrimaryColor(light: const Color(0xFF202120), dark: const Color(0xFFFFFFFF));
+    PrimaryColor(light: const Color(0x0), dark: const Color(0x0));
 
 ThemeData lightTheme(ColorScheme? material, box, Color? dynamic) {
   bool isDynamic =

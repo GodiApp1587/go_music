@@ -178,33 +178,33 @@ class _MainScreenState extends State<MainScreen> {
                     NavigationDestination(
                       icon: Icon(
                         Icons.home_outlined,
-                        color: darkTheme ? Colors.lightGreenAccent : Colors.lightGreenAccent,
+                        color:  Colors.lightGreenAccent,
                       ),
                       selectedIcon: Icon(
                         Icons.home_rounded,
-                        color: darkTheme ? Colors.black : Colors.lightGreenAccent,
+                        color:  Color(0xff3B00BE),
                       ),
                       label: S.of(context).Home,
                     ),
                     NavigationDestination(
                       icon: Icon(
                         CupertinoIcons.heart,
-                        color: darkTheme ? Colors.lightGreenAccent : Colors.lightGreenAccent,
+                        color:  Colors.lightGreenAccent,
                       ),
                       selectedIcon: Icon(
                         CupertinoIcons.heart_fill,
-                        color: darkTheme ? Colors.black : Colors.lightGreenAccent,
+                        color:  Color(0xff3B00BE),
                       ),
                       label: S.of(context).Settings,
                     ),
                     NavigationDestination(
                       icon: Icon(
                         CupertinoIcons.download_circle,
-                        color: darkTheme ? Colors.lightGreenAccent : Colors.lightGreenAccent,
+                        color:  Colors.lightGreenAccent,
                       ),
                       selectedIcon: Icon(
                         CupertinoIcons.download_circle_fill,
-                        color: darkTheme ? Colors.black : Colors.lightGreenAccent,
+                        color:  Color(0xff3B00BE),
                       ),
                       label: S.of(context).Settings,
                     ),

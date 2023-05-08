@@ -29,23 +29,33 @@ class PanelHeader extends StatelessWidget {
               ? TextDirection.rtl
               : TextDirection.ltr,
           child: Material(
-            color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.7),
-            elevation: 20,
+            color: Color(0xff16161A),
+            elevation: 30,
             child: Container(
-              height: 70,
-              padding: const EdgeInsets.all(0),
+            padding: const EdgeInsets.all(0),
+            height: 70,
+
+            decoration: BoxDecoration(
+
+
+        image: DecorationImage(
+        image: AssetImage('assets/images/player_back.png'), // ruta de la imagen de fondo
+        fit: BoxFit.cover, // ajuste de la imagen en el contenedor
+        ),
+            ),
+
               child: Column(
                 children: [
                   AbsorbPointer(
                     child: SliderTheme(
                       data: const SliderThemeData().copyWith(
                         trackHeight: 2,
-                        thumbColor: Colors.black,
+                        thumbColor: Colors.lightGreenAccent,
                         inactiveTrackColor: darkTheme
                             ? Colors.black.withOpacity(0.4)
                             : Colors.white.withOpacity(0.4),
                         activeTrackColor:
-                            darkTheme ? Colors.white : Colors.black,
+                            darkTheme ? Colors.yellowAccent : Colors.lightGreenAccent,
                         thumbShape: SliderComponentShape.noThumb,
                         trackShape: const RectangularSliderTrackShape(),
                         overlayShape: SliderComponentShape.noOverlay,
@@ -83,7 +93,7 @@ class PanelHeader extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         ClipRRect(
-                          borderRadius: BorderRadius.circular(2),
+                          borderRadius: BorderRadius.circular(25),
                           child: song.art != null
                               ? Image.file(
                                   File(song.art!),
@@ -105,7 +115,7 @@ class PanelHeader extends StatelessWidget {
                                   },
                                 ),
                         ),
-                        const SizedBox(width: 8),
+                        const SizedBox(width: 11),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,9 +135,9 @@ class PanelHeader extends StatelessWidget {
                                 Text(
                                   song.artists.first.name,
                                   style: const TextStyle(
-                                    fontSize: 14,
+                                    fontSize: 10,
                                     fontWeight: FontWeight.bold,
-                                    color: Color.fromARGB(255, 93, 92, 92),
+                                    color: Colors.white70,
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
@@ -154,8 +164,8 @@ class PanelHeader extends StatelessWidget {
                                     return Icon(
                                       Icons.play_arrow_rounded,
                                       color: darkTheme
-                                          ? Colors.white
-                                          : Colors.black,
+                                          ? Colors.lightGreenAccent
+                                          : Colors.lightGreenAccent,
                                     );
                                   case ProcessingState.ready:
                                     return Icon(
@@ -163,8 +173,8 @@ class PanelHeader extends StatelessWidget {
                                           ? Icons.pause_rounded
                                           : Icons.play_arrow_rounded,
                                       color: darkTheme
-                                          ? Colors.white
-                                          : Colors.black,
+                                          ? Colors.lightGreenAccent
+                                          : Colors.lightGreenAccent,
                                     );
                                   default:
                                     return const CircularProgressIndicator();
@@ -177,7 +187,7 @@ class PanelHeader extends StatelessWidget {
                             },
                             icon: Icon(
                               Icons.skip_next_rounded,
-                              color: darkTheme ? Colors.white : Colors.black,
+                              color: darkTheme ? Colors.lightGreenAccent : Colors.lightGreenAccent,
                             ))
                       ],
                     ),

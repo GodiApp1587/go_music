@@ -14,4 +14,7 @@ class AssetsRes {
   static const String FONDO_LIKE = 'assets/images/fondo_like.png';
   static const String FONDO_THEME = 'assets/images/fondo_theme.png';
   static const String LIKE = 'assets/images/like.png';
+  static const String PLAYER_APP = 'assets/images/player_app.png';
+  static const String PLAYER_BACK = 'assets/images/player_back.png';
+  static const String PLAYER_BLANCO = 'assets/images/player_blanco.png';
 }

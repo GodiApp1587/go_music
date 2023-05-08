@@ -41,7 +41,7 @@ class _DownloadScreenState extends State<DownloadScreen> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).brightness == Brightness.light
             ? const Color(0xffFFFFFF).withAlpha(200)
-            : Colors.transparent,
+            : Colors.black,
 
         elevation: 0,
         title: const Text("Downloads"),
@@ -73,7 +73,7 @@ class _DownloadScreenState extends State<DownloadScreen> {
                       borderRadius: BorderRadius.circular(20),
                       color: pageIndex == 0
                           ? Theme.of(context).colorScheme.primary
-                          : Colors.transparent,
+                          : Colors.grey.shade700,
                     ),
                     child: GestureDetector(
                       onTap: () {
@@ -87,7 +87,7 @@ class _DownloadScreenState extends State<DownloadScreen> {
                         style: pageIndex == 0
                             ? Theme.of(context).primaryTextTheme.displaySmall
                             : TextStyle(
-                                color: darkTheme ? Colors.white : Colors.black),
+                                color: darkTheme ? Colors.lightGreenAccent : Colors.lightGreenAccent),
                       ),
                     ),
                   ),
@@ -98,7 +98,7 @@ class _DownloadScreenState extends State<DownloadScreen> {
                       borderRadius: BorderRadius.circular(20),
                       color: pageIndex == 1
                           ? Theme.of(context).colorScheme.primary
-                          : Colors.transparent,
+                          : Colors.grey.shade700
                     ),
                     child: GestureDetector(
                       onTap: () {
@@ -113,7 +113,7 @@ class _DownloadScreenState extends State<DownloadScreen> {
                         style: pageIndex == 1
                             ? Theme.of(context).primaryTextTheme.displaySmall
                             : TextStyle(
-                                color: darkTheme ? Colors.white : Colors.black),
+                                color: darkTheme ? Colors.lightGreenAccent: Colors.lightGreenAccent),
                       ),
                     ),
                   ),

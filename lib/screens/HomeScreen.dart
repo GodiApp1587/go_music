@@ -315,7 +315,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                       .primaryTextTheme
                                                       .titleLarge
                                                       ?.copyWith(
-                                                    fontSize: 21,
+                                                    fontSize: 22,
                                                     fontWeight:
                                                     FontWeight
                                                         .w600,
@@ -382,7 +382,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                               : Color(0xff0C0C0C))
                                                               .withOpacity(
                                                               0.2),
-                                                          width: 141,
+                                                          width: 140,
                                                           child:
                                                           Column(
                                                             crossAxisAlignment:
@@ -442,7 +442,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                   .primaryTextTheme
                                                   .titleLarge
                                                   ?.copyWith(
-                                                fontSize: 21,
+                                                fontSize: 22,
                                                 fontWeight:
                                                 FontWeight.w600,
                                               ),
@@ -666,9 +666,9 @@ class _HomeScreenState extends State<HomeScreen>
                                                 padding:
                                                 const EdgeInsets
                                                     .symmetric(
-                                                    vertical: 8,
+                                                    vertical: 9,
                                                     horizontal:
-                                                    8),
+                                                    9.6),
                                                 child: Text(
                                                   title,
                                                   style: Theme.of(
@@ -676,10 +676,10 @@ class _HomeScreenState extends State<HomeScreen>
                                                       .primaryTextTheme
                                                       .titleLarge
                                                       ?.copyWith(
-                                                    fontSize: 24,
+                                                    fontSize: 22,
                                                     fontWeight:
                                                     FontWeight
-                                                        .bold,
+                                                        .w600,
                                                   ),
                                                 ),
                                               ),

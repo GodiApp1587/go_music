@@ -39,12 +39,25 @@ class _PlayerScreenState extends State<PlayerScreen> {
 
     return song != null
         ? Container(
-            color: Theme.of(context).scaffoldBackgroundColor,
+            color: Colors.lightGreenAccent,
             child: SafeArea(
               child: LayoutBuilder(builder: (context, constraints) {
                 return SingleChildScrollView(
                   child: Container(
-                    color: Theme.of(context).scaffoldBackgroundColor,
+                    // Utiliza un gradiente de color para el tema oscuro y un color sólido para el tema claro
+                    decoration: BoxDecoration(
+                      image: Theme.of(context).brightness == Brightness.light
+                          ? const DecorationImage(
+                        image: AssetImage("assets/images/player_blanco.png"),
+                        fit: BoxFit.cover,
+                      ) // Imagen de fondo para tema oscuro
+                          : Theme.of(context).brightness == Brightness.dark
+                          ? const DecorationImage(
+                        image: AssetImage("assets/images/player_app.png"),
+                        fit: BoxFit.cover,
+                      ) // Imagen de fondo para tema oscuro
+                          : null, // Color sólido para tema claro
+                    ),
                     constraints:
                         BoxConstraints(minHeight: constraints.maxHeight),
                     child: ValueListenableBuilder(
@@ -273,8 +286,8 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                                   return Icon(
                                                       Icons.play_arrow_rounded,
                                                       color: isDarkTheme
-                                                          ? Colors.black
-                                                          : Colors.white,
+                                                          ? Colors.lightGreenAccent
+                                                          : Colors.lightGreenAccent,
                                                       size: constraints
                                                                   .maxWidth >
                                                               35
@@ -459,8 +472,8 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                                                 : Icons
                                                                     .pause_rounded,
                                                             color: isDarkTheme
-                                                                ? Colors.white
-                                                                : Colors.black,
+                                                                ? Colors.lightGreenAccent
+                                                                : Colors.lightGreenAccent,
                                                           ),
                                                         )
                                                       ],
