@@ -102,21 +102,20 @@ class _MainScreenState extends State<MainScreen> {
                                     ? TextDirection.rtl
                                     : TextDirection.ltr,
                             child: const DownloadScreen(),
-
-                         ),
-                   //      Directionality(
-                     //     textDirection:
-                       //   box.get('textDirection', defaultValue: 'ltr') ==
-                     // 'rtl'
-                     // ? TextDirection.rtl
-                       //   : TextDirection.ltr,
-                     // child:SliderScreen(), ),
-                       //   Directionality(
-                         //   textDirection:
-                           // box.get('textDirection', defaultValue: 'ltr') ==
-                             //   'rtl'
-                            //    ? TextDirection.rtl
-                              //  : TextDirection.ltr,
+                          ),
+                          //      Directionality(
+                          //     textDirection:
+                          //   box.get('textDirection', defaultValue: 'ltr') ==
+                          // 'rtl'
+                          // ? TextDirection.rtl
+                          //   : TextDirection.ltr,
+                          // child:SliderScreen(), ),
+                          //   Directionality(
+                          //   textDirection:
+                          // box.get('textDirection', defaultValue: 'ltr') ==
+                          //   'rtl'
+                          //    ? TextDirection.rtl
+                          //  : TextDirection.ltr,
                           //  child:PageLoginGuideAr(), ),
                         ],
                       );
@@ -154,19 +153,16 @@ class _MainScreenState extends State<MainScreen> {
                 image: DecorationImage(
                   image: AssetImage('assets/images/bottom.png'),
                   fit: BoxFit.cover,
-                ),),
-
-
+                ),
+              ),
               child: Container(
                 decoration: BoxDecoration(
-
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
                       Color(0xff0B0B0E).withOpacity(0.1),
                       Color(0xff0B0B0E).withOpacity(0.4),
-
                       Color(0xff000000)
                     ],
                   ),
@@ -178,59 +174,59 @@ class _MainScreenState extends State<MainScreen> {
                     NavigationDestination(
                       icon: Icon(
                         Icons.home_outlined,
-                        color:  Colors.lightGreenAccent,
+                        color: Colors.lightGreenAccent,
                       ),
                       selectedIcon: Icon(
                         Icons.home_rounded,
-                        color:  Color(0xff3B00BE),
+                        color: Color(0xef0035ff),
                       ),
                       label: S.of(context).Home,
                     ),
                     NavigationDestination(
                       icon: Icon(
                         CupertinoIcons.heart,
-                        color:  Colors.lightGreenAccent,
+                        color: Colors.lightGreenAccent,
                       ),
                       selectedIcon: Icon(
                         CupertinoIcons.heart_fill,
-                        color:  Color(0xff3B00BE),
+                        color: Color(0xef0035ff),
                       ),
                       label: S.of(context).Settings,
                     ),
                     NavigationDestination(
                       icon: Icon(
                         CupertinoIcons.download_circle,
-                        color:  Colors.lightGreenAccent,
+                        color: Colors.lightGreenAccent,
                       ),
                       selectedIcon: Icon(
                         CupertinoIcons.download_circle_fill,
-                        color:  Color(0xff3B00BE),
+                        color: Color(0xef0035ff),
                       ),
                       label: S.of(context).Settings,
                     ),
-                //    NavigationDestination(
+                    //    NavigationDestination(
 
-                  //    icon: Icon(
+                    //    icon: Icon(
                     //    CupertinoIcons.play_rectangle,
-                      //  color: darkTheme ? Colors.white : Colors.black,
+                    //  color: darkTheme ? Colors.white : Colors.black,
                     //  ),
-                     // selectedIcon: Icon(
-                       // CupertinoIcons.play_rectangle,
-                      //  color: darkTheme ? Colors.black : Colors.white,
+                    // selectedIcon: Icon(
+                    // CupertinoIcons.play_rectangle,
+                    //  color: darkTheme ? Colors.black : Colors.white,
                     //  ),
                     //  label: S.of(context).Settings,
                     //),
-                   // NavigationDestination(
+                    // NavigationDestination(
                     //  icon: Icon(
-                      //  CupertinoIcons.play_rectangle,
-                      //  color: darkTheme ? Colors.white : Colors.black,
-                     // ),
-                     // selectedIcon: Icon(
-                       // CupertinoIcons.play_rectangle,
-                      //  color: darkTheme ? Colors.black : Colors.white,
-                     // ),
-                     // label: S.of(context).Settings,
-                   // ),
+                    //  CupertinoIcons.play_rectangle,
+                    //  color: darkTheme ? Colors.white : Colors.black,
+                    // ),
+                    // selectedIcon: Icon(
+                    // CupertinoIcons.play_rectangle,
+                    //  color: darkTheme ? Colors.black : Colors.white,
+                    // ),
+                    // label: S.of(context).Settings,
+                    // ),
                   ],
                   onDestinationSelected: (int index) {
                     _pageController.animateToPage(

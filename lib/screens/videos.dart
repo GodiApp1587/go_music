@@ -93,52 +93,7 @@ class _VideosScreenState extends State<VideosScreen> with TickerProviderStateMix
                                 width: 2,
                               ),
                             ),
-                            child: Container(
-                              height: 550,
-                              width: 340,
-                              child: Column(
-                                children: [
-                                Expanded(
-                                flex: 2,
-                                child: YoutubePlayer(
-                                  controller: _controller,
-                                  showVideoProgressIndicator: true,
-                                ),
-                              ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Container(
-                                      child: Column(
-                                        children: [
-                                          SizedBox(height: 10),
-                                          Text(
-                                            'Lista de reproducción',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 16,
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: ListView.builder(
-                                              itemBuilder: (context, index) {
-                                                // Aquí puedes construir cada elemento de la lista de videos
-                                                return ListTile(
-                                                  title: Text('Video ${index + 1}'),
-                                                  onTap: () {
-                                                    _controller.load(YoutubePlayer.convertUrlToId("https://www.youtube.com/watch?v=efgh5678")!);
-                                                  },
-                                                );
-                                              },
-                                              itemCount: 10,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+
                           ),
                         ),
                       ),

@@ -39,12 +39,11 @@ class _PlayerScreenState extends State<PlayerScreen> {
 
     return song != null
         ? Container(
-            color: Colors.lightGreenAccent,
+color: Colors.lightGreenAccent,
             child: SafeArea(
               child: LayoutBuilder(builder: (context, constraints) {
                 return SingleChildScrollView(
                   child: Container(
-                    // Utiliza un gradiente de color para el tema oscuro y un color sólido para el tema claro
                     decoration: BoxDecoration(
                       image: Theme.of(context).brightness == Brightness.light
                           ? const DecorationImage(
@@ -84,7 +83,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                               (context, error, stackTrace) {
                                             return Image.asset(
                                               "assets/images/song.png",
-                                              fit: BoxFit.contain,
+                                              fit: BoxFit.cover,
                                             );
                                           },
                                           fit: BoxFit.contain,

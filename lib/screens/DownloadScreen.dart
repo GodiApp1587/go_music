@@ -36,12 +36,12 @@ class _DownloadScreenState extends State<DownloadScreen> {
 
   @override
   Widget build(BuildContext context) {
-    bool darkTheme = Theme.of(context).brightness == Brightness.dark;
+    bool darkTheme = Theme.of(context).brightness == Brightness.light;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).brightness == Brightness.light
             ? const Color(0xffFFFFFF).withAlpha(200)
-            : Colors.black,
+            : Colors.transparent,
 
         elevation: 0,
         title: const Text("Downloads"),
@@ -67,13 +67,12 @@ class _DownloadScreenState extends State<DownloadScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: pageIndex == 0
-                          ? Theme.of(context).colorScheme.primary
-                          : Colors.grey.shade700,
+                          ? darkTheme ? Colors.lightGreenAccent : Colors.lightGreenAccent
+                          : Theme.of(context).colorScheme.primary,
                     ),
                     child: GestureDetector(
                       onTap: () {
@@ -82,41 +81,59 @@ class _DownloadScreenState extends State<DownloadScreen> {
                           pageIndex = 0;
                         });
                       },
-                      child: Text(
-                        "Downloaded",
-                        style: pageIndex == 0
-                            ? Theme.of(context).primaryTextTheme.displaySmall
-                            : TextStyle(
-                                color: darkTheme ? Colors.lightGreenAccent : Colors.lightGreenAccent),
+                      child: Center(
+                        child: Text(
+                          "Downloaded",
+                          style: TextStyle(
+                            color: Theme.of(context).brightness == Brightness.dark ? Colors.black87 : Colors.white,
+                            fontWeight: FontWeight.w700,
+                            shadows: [
+                              Shadow(
+                                color: Colors.black.withOpacity(0.3),
+                                offset: Offset(1, 0.7),
+                                blurRadius: 1.1,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                   ),
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: pageIndex == 1
-                          ? Theme.of(context).colorScheme.primary
-                          : Colors.grey.shade700
+                          ? Colors.lightGreenAccent
+                          : Theme.of(context).colorScheme.primary,
                     ),
                     child: GestureDetector(
                       onTap: () {
                         pageController.jumpToPage(1);
-
                         setState(() {
                           pageIndex = 1;
                         });
                       },
-                      child: Text(
-                        "Downloading",
-                        style: pageIndex == 1
-                            ? Theme.of(context).primaryTextTheme.displaySmall
-                            : TextStyle(
-                                color: darkTheme ? Colors.lightGreenAccent: Colors.lightGreenAccent),
+                      child: Center(
+                        child: Text(
+                          "Downloading",
+                          style: TextStyle(
+                            color: Theme.of(context).brightness == Brightness.dark ? Colors.black87 : Colors.white,
+                            fontWeight: FontWeight.w700,
+                           shadows: [
+                              Shadow(
+                                color: Colors.black.withOpacity(0.3),
+                                offset: Offset(1, 0.7),
+                                blurRadius: 1.1,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                   ),
+
+
                 ],
               ),
             ),
@@ -154,7 +171,7 @@ class _DownloadScreenState extends State<DownloadScreen> {
                           return Center(
                             child: Text(
                               S.of(context).Nothing_Here,
-                              style: Theme.of(context).primaryTextTheme.bodyLarge,
+                             style: TextStyle(color: Colors.transparent),
                             ),
                           );
                         }
